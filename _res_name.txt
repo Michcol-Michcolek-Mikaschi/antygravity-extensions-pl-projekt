@@ -1,0 +1,249 @@
+﻿AbortError
+Agent
+ALIAS
+All
+All Files
+ALLOW
+Anno Domini
+Annotation
+Antigravity
+Argon
+Array
+Bang
+Before Christ
+Boron
+Bow Tie Rectangle
+C#
+C/C++
+Carbon
+Circle
+CLOSED
+Cloud
+CODE_SIZE
+ConditionError
+CORD
+Crossed Circle
+CType
+Curly Brace
+Curly Braces
+Curved Trapezoid
+Cylinder
+DECLARATION
+DEFAULT_SYMBOL_VISIBILITY_UNKNOWN
+DefaultSymbolVisibility
+DELIMITED
+DescriptorProto
+Dialog
+Dialog.Backdrop
+Dialog.Description
+Dialog.Overlay
+Dialog.Panel
+Dialog.Title
+Diamond
+Divided Rectangle
+Document
+Double Circle
+Dubnium
+Edition
+EDITION_1_TEST_ONLY
+EDITION_2_TEST_ONLY
+EDITION_2023
+EDITION_2024
+EDITION_99997_TEST_ONLY
+EDITION_99998_TEST_ONLY
+EDITION_99999_TEST_ONLY
+EDITION_LEGACY
+EDITION_MAX
+EDITION_PROTO2
+EDITION_PROTO3
+EDITION_UNKNOWN
+EDITION_UNSTABLE
+EditionDefault
+ENFORCE_NAMING_STYLE_UNKNOWN
+EnforceNamingStyle
+ENUM_TYPE_UNKNOWN
+EnumDescriptorProto
+EnumOptions
+EnumReservedRange
+EnumType
+EnumValueDescriptorProto
+EnumValueOptions
+EOF
+Erbium
+EXPANDED
+EXPLICIT
+EXPORT_ALL
+EXPORT_TOP_LEVEL
+ExtensionRange
+ExtensionRangeOptions
+FeatureSet
+FeatureSetDefaults
+FeatureSetEditionDefault
+FeatureSupport
+Fermium
+FIELD_PRESENCE_UNKNOWN
+FieldDescriptorProto
+FieldOptions
+FieldPresence
+FileDescriptorProto
+FileDescriptorSet
+FileOptions
+Filled Circle
+Filled Rectangle
+Flag
+Flipped Triangle
+FocusTrap
+Framed Circle
+Framed Rectangle
+Gallium
+Gemini 2.5 Flash Image
+Gemini 3 Pro Image
+Gemini 3.1 Flash Image
+GeneratedCodeInfo
+Go
+Half-Rounded Rectangle
+Hexagon
+Hidden
+Horizontal Cylinder
+Hourglass
+Hydrogen
+IDEMPOTENCY_UNKNOWN
+IdempotencyLevel
+IDEMPOTENT
+IMPLICIT
+Iron
+Java
+Jod
+JS_NORMAL
+JS_NUMBER
+JS_STRING
+JSON_FORMAT_UNKNOWN
+JsonFormat
+JSType
+Label
+LABEL_OPTIONAL
+LABEL_REPEATED
+LABEL_REQUIRED
+Lean Left
+Lean Right
+LEGACY_BEST_EFFORT
+LEGACY_REQUIRED
+LENGTH_PREFIXED
+Lightning Bolt
+Lined Cylinder
+Lined Document
+Lined Rectangle
+Listbox
+Listbox.Button
+Listbox.Label
+Listbox.Option
+Listbox.Options
+LITE_RUNTIME
+LOCAL_ALL
+Location
+Menu
+Menu.Button
+Menu.Item
+Menu.Items
+MESSAGE_ENCODING_UNKNOWN
+MessageEncoding
+MessageOptions
+MethodDescriptorProto
+MethodOptions
+NamePart
+NO_SIDE_EFFECTS
+NONE
+Notched Rectangle
+Odd
+OneofDescriptorProto
+OneofOptions
+OPEN
+OptimizeMode
+OptionRetention
+OptionTargetType
+PACKED
+PHP
+Popover.Group
+Portal
+Python
+RECORDING_PHASE_TOKEN
+Rectangle
+REPEATED_FIELD_ENCODING_UNKNOWN
+RepeatedFieldEncoding
+ReservedRange
+RETENTION_RUNTIME
+RETENTION_SOURCE
+RETENTION_UNKNOWN
+Rounded Rectangle
+Ruby
+Semantic
+ServiceDescriptorProto
+ServiceOptions
+SET
+Sloped Rectangle
+Small Circle
+SourceCodeInfo
+SPEED
+Stacked Document
+Stacked Rectangle
+Stadium
+STRICT
+STRING
+STRING_PIECE
+STYLE_LEGACY
+STYLE2024
+Symbol
+SymbolVisibility
+Tagged Document
+Tagged Rectangle
+TARGET_TYPE_ENUM
+TARGET_TYPE_ENUM_ENTRY
+TARGET_TYPE_EXTENSION_RANGE
+TARGET_TYPE_FIELD
+TARGET_TYPE_FILE
+TARGET_TYPE_MESSAGE
+TARGET_TYPE_METHOD
+TARGET_TYPE_ONEOF
+TARGET_TYPE_SERVICE
+TARGET_TYPE_UNKNOWN
+Text Block
+Transition
+Transition.Child
+Trapezoid Base Bottom
+Trapezoid Base Top
+Trapezoidal Pentagon
+TreemapRows
+Triangle
+Type
+TYPE_BOOL
+TYPE_BYTES
+TYPE_DOUBLE
+TYPE_ENUM
+TYPE_FIXED32
+TYPE_FIXED64
+TYPE_FLOAT
+TYPE_GROUP
+TYPE_INT32
+TYPE_INT64
+TYPE_MESSAGE
+TYPE_SFIXED32
+TYPE_SFIXED64
+TYPE_SINT32
+TYPE_SINT64
+TYPE_STRING
+TYPE_UINT32
+TYPE_UINT64
+UninterpretedOption
+Unknown
+Unknown channel
+UNVERIFIED
+User Implicit
+UTF8_VALIDATION_UNKNOWN
+Utf8Validation
+VerificationState
+VERIFY
+VISIBILITY_EXPORT
+VISIBILITY_LOCAL
+VISIBILITY_UNSET
+VisibilityFeature
+Window Pane

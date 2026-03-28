@@ -1,0 +1,106 @@
+﻿Adds a comment
+Agent always asks for review.
+Agent browser tools enabled
+Agent can plan before executing tasks. Use for deep research, complex tasks, or collaborative work
+Agent onboarding state
+Agent will always be able to run terminal commands locally and will never request for a review when making changes.
+Agent will decide when to ask for review based on task complexity and user preference.
+Agent will execute tasks directly. Use for simple tasks that can be completed faster
+Available AI credits (undefined means not loaded yet)
+Bang
+Browser allowlisted URLs
+Browser CDP port
+Browser JS execution policy
+Browser user profile path
+Cached setting value
+Choose your preferred terminal and review policies.
+Chrome binary path
+Clone current workspace into a new independent workspace
+Communication link
+Control which URLs the browser can access. Add domains or full URLs to the allowlist.
+Custom path for the browser user profile directory. Leave empty for default (~/.gemini/antigravity-browser-profile).
+Database storage
+Decision-making step
+Determines the markup language of the output.
+Direct access storage
+Disk storage
+Divided process shape
+Encountered an error
+Enterprise FetchAdminControlsResponse proto (overrides user settings)
+Extraction process
+Fork or join in process flow
+GCP Project ID for enterprise features.
+Google Antigravity - Experience liftoff
+Highlight newly inserted text after accepting a Tab completion.
+Internal storage
+Invalid auth token
+Junction point
+Language Server Client Infos
+Language Server Client Machine Infos
+Lined document
+Lined process shape
+Loop limit step
+Makes \\color behave like LaTeX's 2-argument \\textcolor, instead of LaTeX's one-argument \\color mode change.
+Manual file operation
+Manual input step
+Multiple documents
+Multiple processes
+No OAuth token (user not logged in)
+OAuth token information
+Odd shape
+Open Agent panel on window reload
+Open files in the background if Agent creates or edits them
+Paper tape
+Path to the Chrome/Chromium executable. Leave empty for auto-detection.
+Port number for Chrome DevTools Protocol remote debugging. Leave empty for default (9222).
+Post-onboarding completed steps
+Predict the location of your next edit and navigates you there with a tab keypress.
+Preparation or condition step
+Priority action
+Quickly add and update imports with a tab keypress.
+Raw theme data for copying to tests
+Render display math flush left.
+Render display math in leqno style (left-justified tags).
+Represents a card
+Represents a collate operation
+Represents a delay
+Represents a display
+Represents a document
+Represents a manual task
+Represents a stop point
+Represents an event
+Represents input or output
+Represents output or input
+Run in a new worktree
+Run in your current workspace
+Secure mode enabled state (user toggle)
+Server errored internally
+Server returned an invalid API key or name
+Set the speed of tab suggestions
+Show suggestions when typing in the editor
+Small starting point
+Standard process shape
+Starting point
+Stop point
+Stored data
+Subprocess
+Summary
+Tagged document
+Tagged process
+Terminal point
+Text block
+This Object indicates the Parser is during Recording Phase
+Trust the input, enabling all HTML features such as \\url.
+User status information
+When enabled, Agent can interact with Google Workspace through the API to search and read documents.
+When enabled, Antigravity will play a sound when Agent finishes generating a response.
+When enabled, sandboxed commands are allowed to make network requests.
+When enabled, terminal commands run with sandbox restrictions.
+When enabled, the agent will be able to access past conversations to inform its responses.
+When enabled, the Changes Overview toolbar will automatically expand when Agent finishes generating a response.
+Whether to use AI credits for model requests
+Window height
+Window mode (0=Maximized, 1=Normal, 2=Fullscreen)
+Window width
+Window X position
+Window Y position

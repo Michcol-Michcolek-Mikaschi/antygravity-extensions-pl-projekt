@@ -1,0 +1,231 @@
+﻿=== TOGGLE... count=9 ===
+Toggle Changes Panel
+Toggle Debug Mode
+Toggle Editor
+Toggle Fullscreen
+Toggle Model Selector
+Toggle Planning Mode
+Toggle Secondary Sidebar
+Toggle Sidebar
+Toggle Terminal
+
+=== NEW... count=7 ===
+New Agent Script
+New Conversation
+New Conversation in Workspace
+New Editor
+New Editor Window
+New Tab
+New Workspace
+
+=== COPY... count=3 ===
+Copy File Name
+Copy File Path
+Copy Trajectory ID
+
+=== CLOSE... count=4 ===
+Close Folder
+Close Settings
+Close Tab
+Close Workspace
+
+=== ENABLE... count=11 ===
+Enable AI Credit Overages
+Enable Browser Tools
+Enable Demo Mode (Beta)
+Enable Notifications
+Enable Overages
+Enable Recording
+Enable Shell Integration
+Enable Sounds for Agent
+Enable Telemetry
+Enable Terminal Sandbox
+Enable Workspace API
+
+=== SEARCH PLACEHOLDERS count=5 ===
+Search
+Search by name
+Search by name or Cascade ID...
+Search metrics...
+Search skills\u2026
+
+=== RENAME... count=0 ===
+
+=== ADD... count=4 ===
+Add Comment
+Add Custom Model
+Add MCP Servers
+Add Model
+
+=== THEME STRINGS count=21 ===
+&&t)return A(t,{code:O,theme:n.mermaidTheme,...K});if($===
+),n=fZ(t.theme,
+)return;i!==a&&t.setTheme(hL[i])};return window.addEventListener(
+,{element:t,dispose:()=>{},getSelectionRange:()=>null,setVisualHighlight:()=>{}}},mermaidTheme:
+,e),this.config={...this.config,...e}}setThemeConfig(e){pt.trace(
+;function wxr(e,t){const r=NC.theme.indent;if(typeof r==
+Choose an option with \u2190\u2192 or by clicking a theme.
+Choose your theme
+fileIconThemeSentinelKey
+getChartDefaultThemeConfig
+getChartThemeConfig
+getThemeVariables
+Raw theme data for copying to tests
+symbol-icon-theme.json
+themeMode
+themeModeKey
+themeSentinelKey
+themeService
+theme-symbols
+uss-fileIconTheme
+uss-theme
+
+=== INSTALL... count=1 ===
+Install Update
+
+=== PLANNING MODE count=2 ===
+Artifacts are created when the agent performs more complex, longer running tasks while in Planning mode.
+Toggle Planning Mode
+
+=== CONFIRM... count=4 ===
+Confirm Browser Interaction
+Confirm MCP arguments:
+Confirm Undo
+Confirm Window Reload
+
+=== RESTART... count=1 ===
+Restart Main Language Server
+
+=== LOADING CHILDREN count=9 ===
+Loading Browser recording...
+Loading conversation...
+Loading custom agents...
+Loading knowledge items...
+Loading MCP servers...
+Loading metrics...
+Loading models...
+Loading skills...
+Loading...
+
+=== ERROR CHILDREN count=5 ===
+Error
+Error Details
+Error Details:
+Error loading Browser recording
+Error rendering playback
+
+=== STATUS WORDS PRESENCE CHECK ===
+FOUND: "Proceed"
+FOUND: "Allow"
+FOUND: "Deny"
+FOUND: "Blocked"
+FOUND: "Running"
+FOUND: "Skipped"
+FOUND: "Analyzed"
+FOUND: "Pending"
+FOUND: "Active"
+FOUND: "Completed"
+FOUND: "Generating"
+FOUND: "Thinking"
+FOUND: "Planning"
+
+=== ARCHIVE/RESTORE count=3 ===
+Archive / Restore
+Archive Conversation
+Restore Conversation
+
+=== EXPORT... count=1 ===
+Export Artifact
+
+=== DOWNLOAD... count=1 ===
+Download Agent State Debug Diagnostics
+
+=== CREATE... count=0 ===
+
+=== ALLOWED/DENIED CHILDREN count=1 ===
+Denied Sites
+
+=== CONVERSATION... UI count=36 ===
+A new workspace will be created for you when you start a conversation
+Are you sure you want to delete this conversation? This action cannot be undone.
+conversation
+conversation.startNew
+conversational
+conversationHistoryEnabled
+conversationHistoryEnabledSentinelKey
+conversation-view
+conversationView.copyConversationMarkdown
+Copy conversation markdown
+delete-conversation-error
+Failed to copy conversation markdown:
+Failed to delete conversation
+Failed to delete conversation:
+Failed to load conversation
+Failed to rename conversation
+Failed to rename conversation:
+Loading conversation...
+Multi-conversation view is not available
+New conversation in
+No agent client available to start conversation
+No conversation found
+No conversation selected
+No conversations available
+No conversations match the selected filters
+No conversations matching your search
+No conversations yet
+rename-conversation-error
+Search conversations (by name or Cascade ID)
+Select a conversation
+Select workspace to delete all conversations...
+Start new conversation
+View conversation
+When debug mode is on, you can see additional information about each steps in the conversation.
+When enabled, the agent will be able to access past conversations to inform its responses.
+You can prompt the model to try again or start a new conversation if the error persists.
+
+=== CREDITS/QUOTA/BILLING count=44 ===
+AI Credits are used when you've exceeded your model quota. Keep track of your current AI Credits in the
+AI Credits Used to Generate Response
+AI Credits will be used until your quota refreshes. See available AI credits in the 
+argon_insufficient_credits_add_credits
+Auth and Billing
+auth-and-billing
+Available AI credits (undefined means not loaded yet)
+Available AI Credits: 
+availableCredits
+availableCreditsSentinelKey
+Describe your auth or billing issue...
+Enable AI Credit Overages
+Failed to fetch credits:
+Get More AI Credits
+https://antigravity.google/g1-credits?utm_source=antigravity&utm_medium=web
+insertFromPasteAsQuotation
+Insufficient AI Credits
+insufficientCredits
+longTermQuotaExceeded
+minimumCreditAmountForUsageKey
+Model Credits
+Model Quota
+Model quota exhausted
+Model quota reached
+Please describe your auth or billing issue. More details will help our support team resolve your issue quicker. Some helpful information includes:
+Purchase Credits
+purchase_credits_clicked
+Quota available
+Quotation_Mark
+Refresh quota and credits data
+setAvailableCredits
+setUseAICredits
+Unable to determine quota
+useAICredits
+useAICreditsConfig not found
+useAICreditsSentinelKey
+Using AI Credit Overages
+uss-modelCredits
+View your available model quota. Quota refreshes periodically based on your plan.
+What quota or feature is being incorrectly limited
+Whether to use AI credits for model requests
+Your AI credits balance is too low to continue.
+Your quota for this model is running low. 
+Your quota for this model is running low. Keep track of your current AI Credits in the 
+

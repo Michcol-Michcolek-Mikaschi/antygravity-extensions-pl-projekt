@@ -1,0 +1,25 @@
+﻿Add context
+Add pending comment
+Cancel
+Clear agent script
+Close
+Close search
+Confirm Browser Interaction
+Conversation mode
+Delete command
+Deny setting up browser
+Dismiss error
+Dismiss suggested actions
+Loading knowledge items
+Message input
+Open active skills pane
+Open Browser Setup
+Open Workspace
+Options
+Refresh custom agents
+Refresh skills
+Remove audio
+'search' MCP servers
+Select Agent
+Send message
+Stop

@@ -1,0 +1,15 @@
+﻿Add a comment to be queued after the next action
+Archive Conversation
+Cancel
+Click to learn more about sources
+Comment on this line
+Copy to clipboard
+Delete Permanently
+Download Agent State Debug Diagnostics
+Export artifact
+Knowledge items are persistent memories that the agent creates to store information for future reference.
+New Conversation in Workspace
+Rerender Tracker
+Restore Conversation
+Retry
+View conversation

@@ -1,0 +1,833 @@
+﻿=== LOWERCASE CHILDREN (UI text) count=2 ===
+by Google
+for 
+
+=== FAILED TO... count=113 ===
+Failed to add URL to allowlist:
+Failed to add URL to allowlist: addToBrowserAllowlist is undefined
+Failed to build code block, falling back to plaintext:
+Failed to capture browser console logs:
+Failed to capture browser console logs: No console logs found
+Failed to capture screenshot:
+Failed to collect system metrics:
+Failed to construct USS update for SidebarWorkspacesUpdate:
+Failed to copy conversation markdown:
+Failed to copy text using Clipboard API: 
+Failed to copy text using document.execCommand: 
+Failed to create ARI
+Failed to create CitC clone workspace:
+Failed to create new workspace
+Failed to create terminal:
+Failed to create worktree:
+Failed to delete agent:
+Failed to delete conversation
+Failed to delete conversation:
+Failed to delete conversations:
+Failed to delete global artifact:
+Failed to delete knowledge item:
+Failed to delete queued message:
+Failed to delete worktree
+Failed to delete worktree:
+Failed to deserialize OAuth token info proto
+Failed to deserialize sidebar workspace:
+Failed to disconnect OAuth:
+Failed to export file:
+Failed to extract element context:
+Failed to extract range context:
+Failed to extract waveform:
+Failed to fetch available MCP servers:
+Failed to fetch credits:
+Failed to fetch MCP prompt:
+Failed to fetch media for revert:
+Failed to fetch models:
+Failed to fetch skills paths:
+Failed to fetch skills:
+Failed to get ARI for artifact:
+Failed to get code validation states:
+Failed to get state for topic 
+Failed to initialize terminal:
+Failed to load conversation
+Failed to load custom agents
+Failed to load customizations
+Failed to load image
+Failed to load image frame
+Failed to load MCP servers
+Failed to load plugins
+Failed to load skills paths: 
+Failed to load skills: 
+Failed to load video
+Failed to match URI authority
+Failed to match URI authority:
+Failed to move changes
+Failed to open agent config file
+Failed to open agent config:
+Failed to open logs folder:
+Failed to open MCP config file
+Failed to open plugin config file
+Failed to open Review Changes:
+Failed to parse ContextScopeItem from mention node:
+Failed to parse ContextScopeItem:
+Failed to parse data attribute of beautiful mention node
+Failed to parse diagnostics:
+Failed to parse elicitation schema
+Failed to parse environment from shell integration sequence
+Failed to parse notification
+Failed to parse NUX config:
+Failed to parse quota metadata
+Failed to parse quota reset timestamp
+Failed to parse remote connection state
+Failed to parse tool JSON schema:
+Failed to parse URL in ImageAnswer:
+Failed to parse URL in ReadUrlContentTitle:
+Failed to parse window config
+Failed to process video
+Failed to push update
+Failed to read artifacts directory:
+Failed to read from clipboard:
+Failed to read knowledge directory:
+Failed to read knowledge metadata file:
+Failed to recognize value `
+Failed to record code assist metrics:
+Failed to remove agent:
+Failed to remove plugin:
+Failed to rename conversation
+Failed to rename conversation:
+Failed to render diagram
+Failed to scan skills config file:
+Failed to scan skills config file: 
+Failed to send browser cancellation interaction
+Failed to send browser confirmation interaction
+Failed to send deny browser setup interaction
+Failed to send file permission interaction
+Failed to send mcp interaction
+Failed to send message
+Failed to send open browser setup interaction
+Failed to send readUrlContent interaction
+Failed to send runCommand interaction
+Failed to send sendCommandInput interaction
+Failed to set theme:
+Failed to skip browser subagent:
+Failed to start screen recording
+Failed to stat artifacts directory or metadata file:
+Failed to stat knowledge directory:
+Failed to submit auth code:
+Failed to submit elicitations interaction
+Failed to toggle agent:
+Failed to update agent:
+Failed to update conversation annotations:
+Failed to validate URI:
+
+=== ARE YOU SURE... count=1 ===
+Are you sure you want to delete this conversation? This action cannot be undone.
+
+=== SOMETHING WENT WRONG count=2 ===
+Something went wrong
+Something went wrong!
+
+=== NO... CHILDREN count=26 ===
+No agent changes to display
+No artifacts generated.
+No browser pages open
+No cascade ID provided
+No chat model metadata available for this generator
+No chat model metadata available in latest generator metadata
+No chats yet
+No content available for this resource
+No Custom Agents or Plugins
+No customizations found for this workspace.
+No file changes
+No generator metadata available
+No internet. Agent features may not work.
+No items found
+No Javascript Result Output
+No matching results
+No MCP Servers
+No message prompts available
+No models available
+No resources available
+No results found
+No skills loaded.
+No subagents
+No token data available.
+No tracked components
+No workspaces yet
+
+=== ONBOARDING/SETUP count=26 ===
+&&!isNaN(u)&&!isNaN(d)){this.setupTextStyle(e,t,a);var R=r?r+
+);r.layersQueue=new NU(i),r.setupDequeueing()},
+,onboarding:
+[OnboardingTopic] Failed to parse agent onboarding state:
+[OnboardingTopic] Failed to parse post onboarding state:
+Agent onboarding state
+Failed to send deny browser setup interaction
+Failed to send open browser setup interaction
+onboarding_carousel_seen
+Open SSH connection in setup window. When finished, you will be able to select the workspace in the sidebar.
+post_onboarding_step_completed
+Post-onboarding completed steps
+setupBorderColor
+setupDequeueing
+setupDequeueingImpl
+setupDoc
+setupDompurifyHooks
+setupGraphViewbox
+setupImage
+setupOutlineColor
+setupShapeColor
+setupToolTips
+setupViewPortForSVG
+typedoc src/defaultConfig.ts src/config.ts src/mermaid.ts && prettier --write ./src/docs/config/setup
+uss-onboardingState
+You are using the in-browser Babel transformer. Be sure to precompile your scripts for production - https://babeljs.io/docs/setup/
+
+=== CUSTOMIZE/INSTRUCTIONS/MCP count=102 ===
+ does not have a local configuration.`);return}let W=U.configuration.value.commands;if(!W||Object.keys(W).length===0){F(`MCP server 
+),{updateCustomization:d}=Ws(),f=ye(async g=>{if(!g.commandSpec)throw new Error(
+){F(`MCP server 
+)return null;let{serverName:t,toolCall:r}=e.step.value,n=r?.name;return t&&n?`Used MCP tool: ${t}/${n}`:t?`Used MCP tool: ${t}`:
+,{children:i!==null?`${i} active skill${i!==1?
+,ain=e=>{let{updateCustomization:t}=Ws(),{getWindowId:r}=sut(e),{openFiles:n}=aut(),a=ye(async d=>{if(!d.path)return
+,children:['No MCP servers found for 
+,children:e.description})})]})},hCi=({title:e,skills:t})=>A(
+,children:e.path})})]})},dCi=({skill:e})=>{let t=ms();return A(
+,children:t.map(r=>A(dCi,{skill:r},r.path||r.name))})]}),fCi=
+,count:s.skills.length}),A(hut,{items:s.skills,renderItem:(R,F)=>A(pin,{item:R,onOpenFile:t,isLast:F},R.path)})]}),s.rules.length>0&&A(
+,e.Customization=
+,e.MCP=
+,e[e.CASCADE_ENABLE_MCP_TOOLS=245]=
+,e[e.CASCADE_MCP_SERVER_INIT=64]=
+,e[e.CLICKED_TO_CONFIGURE_MCP=62]=
+,e[e.ENTERED_MCP_TOOLBAR_TAB=63]=
+,e[e.JB_MCP_ADD_SERVER=148]=
+,e[e.JB_MCP_EXPAND_TOOLS=150]=
+,e[e.JB_MCP_SAVE_CONFIG=149]=
+,e[e.MCP_RESOURCE=18]=
+,e[e.MCP_TOOL=38]=
+,e[e.MCP_TOOLS=4]=
+,e[e.TEAM_CONFIG_TOGGLE_MCP_SERVERS=163]=
+,e[e.TEAM_CONFIG_UPDATE_MCP_SERVERS=178]=
+,initialCustomization:i,onSaveComplete:s})=>{let[o,u]=Qe(
+,Le)}},[$,b]),de=klt(c1i),{skillPaths:ue,isSkillsLoading:Ie,error:Ee,clearError:Ge,updateSkillPaths:at,refresh:ot}=Jfi(a);return A(nr,{children:[A(
+,skills:e})}),!n&&F.length>0&&A(
+,style:lCi,children:F.map(C=>A(cCi,{skill:C,isInstalled:N.has(C.name.toLowerCase()),onInstallSkill:u},C.path||C.name))})]}),n&&!r&&A(
+. Learn more about skills at
+;var Vas=$t(iB),Ias=eB(gme(),1),gCi={activeCustomizationTab:
+\u{1F4A1} Discover and install more skills at
+],P=Object.keys(W)[0];for(let O of Y)if(W[O]){P=O;break}let j=W[P];if(!j){F(`No installation command found for MCP server 
+}),s.skills.length>0&&A(
+}),u]});let b=s.skills.length+s.rules.length+s.agents.length;return A(
+}):void 0,contentCustomizer:s})},aKa=({count:e})=>A(
+},cCi=({skill:e,isInstalled:t,onInstallSkill:r})=>{let n=ms();return A(
+},OPEN_MCP_DOCS_PAGE:{id:
+Add MCP Servers
+antigravity.isAbleToCustomizeAppIcon
+antigravity.openCustomizationsTab
+Confirm MCP arguments:
+Could not determine MCP config file path
+Could not determine MCP config file path. Please check your home directory settings.
+Could not read MCP config file
+Customization token budget exceeded. Large customizations will be truncated.
+Customization token usage
+Customizations
+Customizations feature is currently only available for the desktop app.
+Customizations token usage: 
+Customize Global Skills
+Enter the required configuration values to install this MCP server.
+Error fetching MCP prompt
+Error fetching MCP prompts:
+Error fetching MCP resources:
+Error fetching workflows, skills, and MCP prompts:
+Error while running MCP tool
+Failed to fetch available MCP servers:
+Failed to fetch MCP prompt:
+Failed to fetch skills paths:
+Failed to fetch skills:
+Failed to load MCP servers
+Failed to load skills paths: 
+Failed to load skills: 
+Failed to open MCP config file
+Failed to scan skills config file:
+Failed to scan skills config file: 
+go/jetski-skills
+google3/configs/jetski/recommended_skills/skills.json
+https://goto.google.com/jetski-skills
+Installed MCP Servers
+Loading custom agents...
+Loading MCP servers...
+Loading skills...
+MCP Configuration Error:
+MCP Error
+MCP Servers
+MCP Servers Disabled
+MCP Tool: 
+No MCP Servers
+No skills loaded.
+Open active skills pane
+Open MCP Config
+ProcessingInstruction
+Refresh custom agents
+Refresh skills
+Refresh skills paths
+Rejected MCP tool
+Run MCP tool call?
+Scanning skills config file...
+Search for MCP servers to add to your configuration
+'search' MCP servers
+Search skills\u2026
+skills
+Skills and Customizations
+skills.txt
+skills-and-customizations
+This skill is installed in your workspace
+useCustomizationsRpcs must be used within a CustomizationsRpcProvider
+View MCP settings
+You currently don't have any MCP Servers installed. Add a MCP tool below or add a custom one via the MCP Config.
+Your administrator has disabled MCP servers for this workspace.
+
+=== WORKSPACE/WORKTREE/BRANCH count=146 ===
+&&t.workspacePaths.length>0&&(a(mai(t)),i.stopPropagation())},children:[A(
+&&u.sectionKind.value.workspaceUri===r);o&&(i.dispose(),a(Qg(o.uri)))});e.pushUpdate({type:
+)(({resolve:r})=>{r({traceJson:CWa()})});return()=>{t.dispose()}}),null},Zee=()=>{let e=Su().sidecarMode;return{workspace:e?
+),$Rr=y((e,t,r)=>{const n=bp.get(e.branch);if(!n)throw new Error(`Branch not found for commit ${e.id}`);const a=t+r,i=n.pos;yp.set(e.id,{x:i,y:a})},
+),Branch:y(a=>t.branch(LRr(a)),
+),ORr=y(e=>e.branch,
+),workspace:{LangiumDocuments:y(t=>new Nje(t),
+),WRr=y(e=>({branch:e.branch,id:e.id??
+).map(x=>({label:x.label,workspaceGroup:C.kind,cascadeIds:x.cascadeIds})):[{label:
+);const o=s.branch;if(s.type===au.MERGE&&!a)throw new Error(
+);t.forEach((n,a)=>{const i=a%fC,s=bp.get(n.name)?.pos;if(s===void 0)throw new Error(`Position not found for branch ${n.name}`);const o=r.append(
+);throw b.hash={text:`merge ${t}`,token:`merge ${t}`,expected:[`branch ${t}`]},b}if(d===void 0||!d){const b=new Error('Incorrect usage of 
+)`);Oa.records.branches.set(t,Oa.records.head!=null?Oa.records.head.id:null),Oa.records.branchConfig.set(t,{name:t,order:r}),SQe(t),pt.debug(
+)`);throw t.hash={text:`checkout ${e}`,token:`checkout ${e}`,expected:[`branch ${e}`]},t}},
+)},workspace:{AstNodeLocator:y(()=>new Xje,
+,...e}),isTool:!0,renderer:tdi},workspaceApi:{isRendered:ja(),icon:e=>A(ir,{name:
+,[e]),n=Oe(()=>{for(let i of t){let s=i.workspaces.find(o=>o.uri===e);if(s)return s.name}return e?.split(
+,{children:A(NB,{text:e.workspaceName,matches:e.workspaceMatches})})]}),e.timestamp&&A(nr,{children:[A(
+,{workspaceInfo:i}=Gn(),s=Oe(()=>(r?r.targetDirectories.map(d=>RV(d,i.homeDir,i.workspaceUris)):[]).join(
+,60332),workspaceUnspecified:Ae(
+,60332),workspaceUnspecified:ve(
+,60352),workspaceTrusted:Ae(
+,60352),workspaceTrusted:ve(
+,60353),workspaceUntrusted:Ae(
+,60353),workspaceUntrusted:ve(
+,60354),workspaceUnknown:Ae(
+,60354),workspaceUnknown:ve(
+,children:[t&&n&&A(n.OpenEditorProvider,{workspaceUri:t,children:i=>A(gc,{className:
+,children:`Open ${n.workspace.toLowerCase()}`}),A(
+,children:A(don,{mcpServerStates:Z.getState(),onViewSettings:U?()=>U(G?.workspaceUris?.[0]):void 0})})]})});HCi.displayName=
+,children:A(NB,{text:e.cascadeId,matches:e.cascadeIdMatches})}),e.workspaceName&&A(nr,{children:[A(
+,children:C2(Nnn)})]})]}),n&&A(n.OpenEditorProvider,{workspaceUri:t,children:F=>A(nr,{children:[A(
+,children:e.workspaces}),A(aa,{id:n,content:`Add ${e.workspace}`,place:
+,children:i.slice(0,3).map((s,o)=>{let u=mu(s.uri);return A(JSi,{workspaceUri:u,recentWorkspace:s},o)})}),A(
+,children:n.workspaces}),o.length===0?A(
+,children:n})}),A(rin,{children:A(P1i,{workspaceUri:e,authority:r,workspaceName:n},e)})]}):A(
+,children:o?.error?A(Gln,{message:o.error,workspaceUri:t,onDismiss:()=>{t&&e.pushUpdate({type:
+,d=0,f=0,g=bp.get(r.branch)?.index;r.type===au.MERGE&&t.id!==r.parents[0]&&(g=bp.get(t.branch)?.index);let b;if(s){o=
+,item:{id:_.sectionKind.value.workspaceUri,label:_.label,path:
+,item:{id:e,label:r.summary,description:i?void 0:Qpi(r.workspaces[0]?.workspaceFolderAbsoluteUri,a),descriptionOrientation:
+,knowledgeDir:void 0,isGoogleInternal:!1},workspaceInfo:{homeDir:
+,label:`Active ${d.workspaces}`}},{id:L,items:T,barrier:{type:
+,label:u?.label??`Open New ${d.workspace}`}}];return f.hideRemoteWorkspaceOption||_.push({type:
+,n)}},[e,t,r])},Gln=({message:e,workspaceUri:t,onDismiss:r})=>{let{editorFeature:n}=Ma(),{logEvent:a}=il();return A(
+,n.workspace]})}),A(
+,n.workspaces.toLowerCase(),
+,onClick:d=>d.stopPropagation(),children:A(oKa,{authority:u,workspaceUri:o,children:A(
+,this.gitBranchLabel2=this.branchLabelColor,this.gitBranchLabel3=
+,u=RV(e.cwd,a.homeDir,a.workspaceUris),d=e.cwd?RV(e.cwd,a.homeDir,a.workspaceUris,15):
+,value:{absoluteUri:e.value.absoluteUri,workspaceUrisToRelativePaths:e.value.workspaceUrisToRelativePaths}}}):e.case===1?t=$t(mo,{scopeItem:{case:
+,workspaces:e?
+,workspaceScriptsDir:a=
+,workspaceUri:mu(e)}};let r=t;return r!==void 0?{routingKey:{kind:
+,workspaceUri:ys(t)})}}):!i&&s?A(Gln,{message:
+,workspaceUris:[]}),[]),s=Oe(()=>({hasDevExtension:!0,customLinks:{docs:
+. Both branches have same head');throw b.hash={text:`merge ${t}`,token:`merge ${t}`,expected:[
+. Cannot merge a branch to itself');throw b.hash={text:`merge ${t}`,token:`merge ${t}`,expected:[
+. Current branch (${Oa.records.currBranch})has no commits`);throw b.hash={text:`merge ${t}`,token:`merge ${t}`,expected:[
+. Current branch (${Oa.records.currBranch})has no commits`);throw g.hash={text:`cherryPick ${t} ${r}`,token:`cherryPick ${t} ${r}`,expected:[
+. Source commit is already on current branch');throw g.hash={text:`cherryPick ${t} ${r}`,token:`cherryPick ${t} ${r}`,expected:[
+:{const r=t.workspaces.find(n=>n.uri===G9n(e0(e.id)));return r?{remove:r.uri}:void 0}case
+:e.pushUpdate(FZi(a.workspaceUri,a.info));break;case
+:e.pushUpdate(r8i(a.cascadeId,a.workspaceUris,a.createdAt,a.initialText));break;case
+:return A(yd,{value:`@${u.value.branch===
+:return{add:ys(e.workspaceUri)};case
+:u.value.branch}`});case
+;break}let u=RV(i,a.homeDir,a.workspaceUris),d=t.extensions.join(
+;let n=t.workspacePaths[0];if(n===void 0)return
+;let R=eYr();return n(F=>{let N=new Fl,C={emitData:V=>{N.fire(V)},workspaceUri:mu(b),pid:void 0,displayName:
+;Vn=await pAi({workspaceUri:jr,items:Zt,media:Ar,getRepoInfos:async Ea=>{if(!B)throw new Error(
+?bp.get(e.branch)?.pos:n;if(i===void 0||a===void 0)throw new Error(`Position were undefined for commit ${e.id}`);return{x:i,y:a,posWithOffset:n}},
+?n:bp.get(e.branch)?.pos,i=qo===
+?r.x<n.x:r.y<n.y)?t.branch:e.branch,o=y(d=>d.branch===s,
+]})]})},JSi=({workspaceUri:e,recentWorkspace:t})=>{let r=vsn(),n=Oe(()=>za.parse(ys(e)),[e]),a=G0i(n),i=ye(()=>{r(e)},[r,e]);return A(
+]},b}if(!Oa.records.branches.has(t)){const b=new Error('Incorrect usage of 
+]},g}const u=Oa.records.branches.get(Oa.records.currBranch);if(u===void 0||!u){const g=new Error(`Incorrect usage of 
+})):t.every(n=>r.includes(n))?[]:t.map((n,a)=>({worktreeUri:n,repoUri:r[a]??r[0]??
+}),a&&t&&A(t.OpenEditorProvider,{workspaceUri:e,children:C=>A(sct,{icon:{type:
+});const n=[r,t.id,t.seq];for(const a in Oa.records.branches)Oa.records.branches.get(a)===t.id&&n.push(a);if(pt.debug(n.join(
+})]})},UCi=({fileDiffData:e})=>{let{workspaceInfo:t,stepHandler:{openFile:r}={}}=Gn(),{homeDir:n,workspaceUris:a}=t;return A(
+})}},[e,u,t,i,a]),Z=ye(async()=>{try{if(b(!0),R.length>0)for(let _ of R)n({worktreeDirUri:_.worktreeUri,repoUri:_.repoUri}).catch(U=>{console.error(
+}`]};Oa.records.head=f,Oa.records.commits.set(f.id,f),Oa.records.branches.set(Oa.records.currBranch,f.id),pt.debug(Oa.records.branches),pt.debug(
+A new workspace will be created for you when you start a conversation
+Add recent remote workspace
+background_citc_workspace_clone
+background_worktree
+branch branch
+branchLabel
+branchLabelBkg label
+citc-workspace-creation-error
+Clone current workspace into a new independent workspace
+Creating workspace\u2026
+delete-worktree-error
+Failed to create CitC clone workspace:
+Failed to create new workspace
+Failed to create worktree:
+Failed to delete worktree
+git-branch
+git-branch-changes
+git-branch-conflicts
+git-branch-create
+git-branch-delete
+git-branch-staged-changes
+I tried to move the worktree changes to the main workspace but it failed.
+label branch-label
+Loading workspace customizations...
+No customizations found for this workspace.
+No workspace URI available to validate input
+No workspace window available
+No workspaces yet
+Open a workspace window to load the customization
+Open SSH connection in setup window. When finished, you will be able to select the workspace in the sidebar.
+open-workspace
+Run in a new git worktree
+Run in a new jj workspace or Fig share
+Run in a new worktree
+Run in your current workspace
+Saves to the .agent/agents/ directory in your current workspace. This script can be version controlled and shared with your team.
+Saves to your global ~/.gemini/antigravity/agents/ directory. This script will be available across all your workspaces.
+Select workspace
+Select workspace to delete all conversations...
+Select workspace to send message
+Select workspace...
+Set up your workspace in the Agent Manager.
+Status bar background color when a workspace or folder is opened. The status bar is shown in the bottom of the window.
+Status bar foreground color when a workspace or folder is opened. The status bar is shown in the bottom of the window.
+The agent manager is a new window allowing you to manage and create agents across workspaces.
+The associated worktree will also be deleted.
+The main workspace may have uncommitted changes blocking the merge. Can you help resolve this so I can retry?
+This skill is installed in your workspace
+uss-workspaceTrust
+vscode-workspace-trust
+When exploring an untrusted workspace with the agent, we recommend enabling strict mode via the settings window.
+workspace
+workspace.vcs
+workspace:^
+workspace_added
+workspace_api_config_sentinel_key
+workspaceApiEnabled
+workspace-location-tooltip
+workspaces
+workspaceSection
+workspaceSelector
+workspacesManager
+worktree-creation-error
+Your administrator has disabled MCP servers for this workspace.
+
+=== OPEN... STRINGS count=26 ===
+Open Agent on Reload
+Open Agent panel on window reload
+Open Browser Setup
+Open Command Palette
+Open Command Palette (Commands)
+Open Console Logs Folder
+Open Conversation History
+Open Conversation Picker
+Open Diff
+Open Editor
+Open Editor Settings
+Open Folder
+Open Launchpad
+Open LS Output Debug Window
+Open MCP Config
+Open Sans
+Open Settings
+Open Setup Window
+Open State Sync Debug Window
+Open System Browser
+Open System Preferences
+Open Trajectory
+Open Trajectory Dashboard
+Open Trajectory Debug Window
+Open Workspace
+Open Workspace Selector
+
+=== CONFIRMATION/WARNING count=20 ===
+,{onClick:U=>{U.preventDefault(),U.stopPropagation(),window.confirm(
+,description:'Toggle if a confirmation is shown when using the 
+,value:$t(jWr,{confirm:!0})}})).catch(o=>{console.error(
+,value:$t(jWr,{confirm:!1})}})).catch(o=>{console.error(
+,value:$t(JWr,{confirm:f,proposedCommandLine:i,submittedCommandLine:a||i})}})).catch(b=>{console.error(
+,value:$t(JWr,{confirm:Y,proposedCommandLine:i,submittedCommandLine:a||i,sandboxOverride:P})}})).catch(M=>{console.error(
+,value:$t(LGa,{confirm:s})}})).catch(u=>{console.error(
+,value:$t(XGa,{confirm:o})}})).catch(d=>{console.error(
+,value:$t(Yme,{confirm:!0})}})).catch(U=>{console.error(
+,value:$t(Yme,{confirm:!0})}})).catch(Z=>{console.error(
+,value:$t(Yme,{confirm:!1})}})).catch(U=>{console.error(
+,value:$t(Yme,{confirm:!1})}})).catch(Z=>{console.error(
+,value:$t(ZGa,{confirm:s})}})).catch(u=>{console.error(
+Are you sure you want to delete this conversation? This action cannot be undone.
+confirmReloadSentinelKey
+confirmWindowReload
+Press 'Enter' to confirm or 'Escape' to cancel
+terminal.integrated.confirmOnExit
+terminal.integrated.confirmOnKill
+You passed `traverse()` a function when it expected a visitor object, are you sure you didn't mean `{ enter: Function }`?
+
+=== THE AGENT... count=8 ===
+The Agent attempted to interact with some sites that are not allowlisted
+The agent has encountered an internal error.
+The agent has not generated any knowledge items yet.
+The agent manager is a new window allowing you to manage and create agents across workspaces.
+The agent was prevented from accessing some sites
+The agent will frequently ask for review.
+The agent will never request for review.
+The agent will wait for you to install the browser extension.
+
+=== WHEN ENABLED/DISABLED count=9 ===
+When enabled, Agent can interact with Google Workspace through the API to search and read documents.
+When enabled, Agent is given awareness of lint errors created by its edits and may fix them without explicit user prompting.
+When enabled, Agent will use IDE's shell integration to detect and report terminal command execution. When disabled, the agent will use it's own shell. Restart the application for this to take effect.
+When enabled, Antigravity will play a sound when Agent finishes generating a response.
+When enabled, enforces settings that prevent the agent from autonomously running targeted exploits and requires human review for all agent actions. Visit antigravity.google/docs/strict-mode for details.
+When enabled, sandboxed commands are allowed to make network requests.
+When enabled, terminal commands run with sandbox restrictions.
+When enabled, the agent will be able to access past conversations to inform its responses.
+When enabled, the Changes Overview toolbar will automatically expand when Agent finishes generating a response.
+
+=== SELECT... count=17 ===
+Select a conversation
+Select a model to send message
+Select a model using the model selector in the input box
+Select Agent
+Select All
+Select an option...
+Select another model
+Select fields...
+Select Model
+Select Model to Send Message
+Select one of the options below.
+Select option
+Select text in the artifact to add a comment
+Select workspace
+Select workspace to delete all conversations...
+Select workspace to send message
+Select workspace...
+
+=== SIGN... count=7 ===
+Sign in
+Sign in again
+Sign in with a different account
+Sign in with Google
+Sign into Google
+Sign out
+Sign out of this server?
+
+=== VIEW... count=15 ===
+View conversation
+View could not be opened
+View customizations
+View diff
+View documentation
+View file
+View MCP settings
+View network request
+View network requests
+View Page
+View plans
+View side-by-side diff
+View token warning
+View unified diff
+View your available model quota. Quota refreshes periodically based on your plan.
+
+=== DELETE... count=8 ===
+Delete agent
+Delete All Conversations
+Delete artifact
+Delete command
+Delete Conversation
+Delete Permanently
+Delete server
+Delete this knowledge item and all its artifacts
+
+=== NOTIFICATION STRINGS count=89 ===
+)),this.notify(
+),destroyRenderer:y(function(){var t=this;t.notify(
+),eLe.prototype={recalculateRenderedStyle:cYe,notify:y(function(){this.notifications++},
+),emitAndNotify:y(function(t,r){if(this.length!==0)return this.cy().notify(t,this),this.emit(t,r),this},
+),emitAndNotify:y(function(t,r){return this.emit(t),this.notify(t,r),this},
+),forceRender:y(function(){return this.notify(
+),gc:y(function(){this.notify(
+),n.transitioning=!1})}else n.transitioning&&(this.removeBypasses(e,a),e.emitAndNotify(
+),noNotifications:y(function(t){this.notifications(!1),t(),this.notifications(!0)},
+),notifications:y(function(t){var r=this._private;return t===void 0?r.notificationsEnabled:(r.notificationsEnabled=!!t,this)},
+),resize:y(function(){return this.invalidateSize(),this.emitAndNotify(
+),this.notify(
+).value,queue:!1}).play().promise()}).then(function(){r.removeBypasses(e,a),e.emitAndNotify(
+);break}return this.notify(
+);for(var F=0;F<r.length;F++){var N=r[F],C=N._private.data;N.isNode()&&(C.parent=b)}R.restore(n,a)}),r.emitAndNotify(
+);for(var i=!1,s=0;s<r.length;s++){var o=r[s],u=a(o);i=i||u}var d=a(t,!0);(i||d)&&(r.length>0?t.notify(
+);for(var R=0;R<r.length;R++){var F=r[R],N=F._private.data;F.isEdge()&&(u&&(N.source=s),d&&(N.target=o))}r.restore(n,a)}),r.emitAndNotify(
+);return o})}function _ki(e){let t;return{channel:n=>(t=n,{sendNotification:a=>{e.sendNotification(a)},sendRequest:a=>{throw new Error(
+);var a=X0r(t);a.cy=r,r._private.renderer=new n(a),this.notify(
+)}else if(Mi(t))if(r===void 0){var o=this[0];return o?i.getStylePropertyValue(o,t):void 0}else i.applyBypass(this,t,r,a),this.emitAndNotify(
+,()=>({notifications:{setDeclarationIdFilter:t=>{},logObservableValue:t=>{console.log(
+,...e}),isTool:!0,renderer:Vni},notifyUser:{isRendered:ja(()=>!1),icon:e=>A(ir,{name:
+,_);L++,Z[_]=s.getCachedImage(U,Y,function(){d.backgroundTimestamp=Date.now(),t.emitAndNotify(
+,{className:`absolute top-3 right-3 ${Cf.notification} flex flex-col gap-2 max-w-sm animate-in fade-in duration-200`,children:e.map(t=>A(lL,{title:A(
+,{className:`fixed bottom-12 left-12 ${Cf.notification} max-w-sm w-full transition-all duration-100 ease-out`,style:{transform:
+,e.Notifications=
+,function(T){r.notifications(!0),r.emit(T),r.one(
+,N),r.emitAndNotify(
+,notification:
+,notification:{tag:a,message:
+,r):t.notify(
+:{let{quotaLimitMessage:C}=e;return _ln({notificationId:kln(C.modelName||
+?e.pushUpdate(zGi(a.notification)):a.type===
+]=null}return this.emitAndNotify(
+}),showNotification:e}),titleContent:()=>A(ete,{text:e?
+}),showNotification:g===
+}),showNotification:n===
+}),showNotification:r.length>0}),titleContent:()=>A(ete,{text:n}),tooltip:()=>n,actionsContent:()=>A(rRe,{}),expandedContent:()=>A(
+}),showNotification:r===
+})]}):null},qee=({icon:e,showNotification:t,notificationOverrides:r})=>{let n=r?.color??
+electronNotification
+emitAndNotify
+Enable Notifications
+Failed to parse notification
+Get notified when the agent needs your attention or completes a task.
+notification
+Notification links foreground color. Notifications slide in from the bottom right of the window.
+Notification Settings
+Notification toast border color. Notifications slide in from the bottom right of the window.
+notification_unread
+notificationCenter.border
+notificationCenterBorder
+notificationCenterHeader.background
+notificationCenterHeader.foreground
+notificationCenterHeaderBackground
+notificationCenterHeaderForeground
+notificationLink.foreground
+Notifications
+Notifications background color. Notifications slide in from the bottom right of the window.
+Notifications center border color. Notifications slide in from the bottom right of the window.
+Notifications center header background color. Notifications slide in from the bottom right of the window.
+Notifications center header foreground color. Notifications slide in from the bottom right of the window.
+Notifications foreground color. Notifications slide in from the bottom right of the window.
+notifications.background
+notifications.border
+notifications.foreground
+notificationsBackground
+notificationsBorder
+notificationsErrorIcon.foreground
+notificationsErrorIconForeground
+notificationsForeground
+notificationsInfoIcon.foreground
+notificationsInfoIconForeground
+notificationsLink
+notificationsWarningIcon.foreground
+notificationsWarningIconForeground
+notificationToast.border
+notificationToastBorder
+NotifyPaintEvent
+notifyUser
+p-3 rounded-md bg-notifications-background border border-error-color flex items-center gap-2 animate-fade-in
+p-3 rounded-md bg-notifications-background border border-generic-gray flex items-center gap-2 animate-fade-in
+shadow-lg border-notifications-border
+text-sm text-notifications-foreground
+The color used for the icon of error notifications. Notifications slide in from the bottom right of the window.
+The color used for the icon of info notifications. Notifications slide in from the bottom right of the window.
+The color used for the icon of warning notifications. Notifications slide in from the bottom right of the window.
+To modify notification settings, open your operating system's system preferences.
+uss-notifications
+
+=== ACTION VERB CHILDREN count=11 ===
+Choose an option with \u2190\u2192 or by clicking a theme.
+Choose your theme
+Click here to learn more
+Configure Your Editor
+Configure your editor settings below.
+Configure your keybindings.
+Connect to Remote Workspace
+Install popular language extensions. Language extensions are required for some Agent features. Other extensions can be found on the marketplace in the editor.
+Learn more
+Learn more.
+Set up your workspace in the Agent Manager.
+
+=== REVIEW... count=2 ===
+Review Changes
+Review Policy
+
+=== FEEDBACK STRINGS count=34 ===
+))},shouldShowCopiedFeedback:!1}}},kln=(e,t)=>`quota_exceeded-${e}${t?
+):await e.materializeAndFocus(Yp.Settings,{settingsManagerTargetScreen:hMr.ProvideFeedback,force:!0})}}}function aWi(e,t){return{label:
+);function nWi(e,t){return{openFeedbackReporter:async()=>{t.isGoogleInternal?window.open(t.reportIssueUrl,
+,60309),feedback:Ae(
+,60309),feedback:ve(
+,e.ProvideFeedback=
+,p1i=`https://feedback-pa.googleapis.com/v1/feedback/products/${cin}/web:submit?key=${din}`,out={
+,Q)}}let O={feedback:{productId:cin,bucket:u,commonData:{description:M,productVersion:rR.ideVersion??rR.version??
+,verificationUrl:r,appealInfo:n,onRetryAuth:a,onOpenFeedback:i})=>{let s=n?.url,o=n?.linkText??
+})]})]})]})]})},YAi=({errorMessage:e,onRetry:t,onOpenFeedback:r})=>A(
+})},QAi=({googleSignInImageUrl:e,onSignIn:t,onCopySignInUrl:r,onFeedback:n,showGcpProjectOption:a=!1,onGcpSignIn:i})=>A(
+},feedback:{id:
+agent_response_feedback_submitted
+agent_response_negative_feedback_submitted
+An error occurred while submitting your feedback. Please try again.
+Attach the trajectory ID to the feedback form
+Drag and drop feedback color for the panel titles. Panels are shown below the editor area and contain views like output and integrated terminal.
+Enter your feedback here...
+Feedback
+Feedback Type
+feedbackType
+For any feedback that does not fit into the above categories.
+General Feedback
+general-feedback
+Provide Feedback
+Send Feedback
+Send feedback as 
+static feedback type, system-generated IDs
+Thank you! Your feedback has been submitted successfully.
+Thanks for your feedback!
+To provide feedback
+user-provided qualitative feedback, system-generated IDs
+We recommend attaching logs. Attaching logs will help the Antigravity team act on and prioritize your feedback.
+WebGLTransformFeedback
+
+=== BROWSER/ALLOWLIST STRINGS count=127 ===
+ in a browser
+' is not a valid browserslist query
+ is not supported in bundles prepared for the browser.')}function L1a(l,h){return!0}function pWi(l){}function gWi(l){}var W1a=new Set([
+ tag is not supported by your browser.',p4a=[
+),allowlistedUrls:R,lexicalEditor:i,MermaidDiagram:V,latexFeature:x})};function W0i(e){let t=e.label.match(/&&(.)/);return t?{text:e.label.replace(/&&(.)/,
+),S=!1),(m=v)!=null&&m.length){var he=Uzn(v,h.browserslistEnv);if(S===
+);PRt(p,h.browsers),hE(m,h.esmodules);for(var E=0,v=Object.keys(h);E<v.length;E++){var S=v[E],I=h[S],D=pg(l,S);if(S===
+);var m=V_(h.browser,l),E=Yie(m,p);if(E)p=E;else if(p.indexOf(
+,...e}),isTool:!0,renderer:$ni},browserScrollDown:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:Aci},browserSubagent:{isRendered:ja(),icon:CA,isTool:!1,renderer:jli},checkpoint:{isRendered:ja(()=>!1),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:Ani},browserSelectOption:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:Bni},browserInput:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:Cni},browserGetNetworkRequest:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:Ini},browserMouseDown:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:Jni},browserScrollUp:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:Kni},browserResizeWindow:{isRendered:ja(),icon:CA,isTool:!0,renderer:Yni},captureBrowserScreenshot:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:mni},browserListNetworkRequests:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:pri},browserPressKey:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:sui},browserDragPixelToPixel:{isRendered:ja(),icon:CA,isTool:!0,renderer:mri},browserMouseWheel:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:tai},browserScroll:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:Tni},browserMouseUp:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:Tui},browserRefreshPage:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:Xni},browserMoveMouse:{isRendered:ja(),icon:e=>A(ir,{name:
+,...e}),isTool:!0,renderer:yui},browserClickElement:{isRendered:ja(),icon:e=>A(ir,{name:
+,60077),browser:Ae(
+,60077),browser:ve(
+,a)}}catch{}if(t.options.href&&!t.options._builtLocation&&_w(t.options.href,this.protocolAllowlist))throw new Error(
+,browserClickElement:
+,browserInput:
+,browserScroll:
+,browserScrollDown:
+,browserScrollUp:
+,browserSelectOption:
+,browserslistEnv:
+,kat=()=>{let{unleashState:{isEnabled:e},stepHandler:{browserToolsEnabled:t}={}}=Gn(),r=e(uKa),n=t&&t!==Oy.DISABLED;return r&&n},Vf=()=>{let{openUrl:e}=Ws(),t=kat(),r=ye(a=>{SX(window,a,
+,listDirectory:e=>`Listed directory ${Rye(e.directoryPathUri)}`,viewFileOutline:e=>`Viewed outline of ${Rye(e.absolutePathUri)}`,browserSubagent:e=>e.taskName?`Browser task: 
+,openBrowserUrl:e=>e.url?`Opened browser: ${e.url}`:
+,stringifySearch:e.stringifySearch??h5a,parseSearch:e.parseSearch??d5a,protocolAllowlist:e.protocolAllowlist??X9a}),typeof document<
+:`add-to-allowlist-${B}`,onClick:()=>{C(T)},disabled:Z,className:Ot(
+:`Open URL in system browser: ${t}`,children:
+:e.pushUpdate(WA(_o.BROWSER_JS_EXECUTION_POLICY,a.browserJsExecutionConfig));break;case
+:e.pushUpdate(WA(_o.BROWSER_TOOLS_CONFIG,a.browserToolsConfig));break;case
+?m.browser=p[E]:E===
+@browser:text
+]);var E={browsers:l.targets};return l.type===
+],browser:[
+]}},browser_version:{matches:[
+||Array.isArray(p)?m={browsers:p}:p&&(
+})}),A(aa,{id:`add-to-allowlist-${B}`,place:
+};eRt.browsers=CKn;var tRt={},VKn={0:
+};tRt.browserVersions=VKn;var IKn={A:{A:{K:0,D:0,E:.0197585,F:.0592756,A:0,B:.355654,zC:0},B:
+~/.gemini/antigravity-browser-profile
++h.browser)}return[m.name+
++l.browsers.toString()+
++p]}},browserslist_config:{matches:[],regexp:/^browserslist config$/i,needsPath:!0,select:function(l){return Ii(void 0,l)}},extends:{matches:[
++p})}},browser_range:{matches:[
++p})}},browser_ray:{matches:[
++p})}},last_browser_major_versions:{matches:[
++p})}},last_browser_versions:{matches:[
+Add to allowlist
+Added to allowlist
+addToAllowlist
+Agent browser tools enabled
+Agent can retrieve console logs from the browser and return it for further processing.
+Agent can scroll on browser pages to access more content.
+Antigravity would like to use the browser.
+antigravity.browserFeatureEnabled
+Browser allowlist begins with localhost and can be updated through the settings page.
+Browser allowlisted URLs
+Browser URL Allowlist
+browser_allowlist_sentinel_key
+browser_cdp_port_sentinel_key
+browser_chrome_binary_path_sentinel_key
+browser_js_execution_config_sentinel_key
+browser_tools_config_sentinel_key
+browser_user_profile_path_sentinel_key
+browserAction
+browserAllowlist
+browserCdpPort
+browserChromePath
+browserCodeBlock
+browserJsExecutionPolicy
+browserLauncher
+browserOpenFailed
+browserPage
+browser-scroll-down-learn-more-tooltip-cta
+browser-scroll-learn-more-tooltip-cta
+browser-scroll-up-learn-more-tooltip-cta
+browserSubagent
+browserSubagentView
+browserText
+browserUserProfilePath
+browserWebSocketBlobReceived
+cached.browserAllowlist
+cached.browserJsExecutionConfig
+cached.browserToolsConfig
+capture-browser-console-logs-learn-more-tooltip
+capture-browser-screenshot-auto-run-tooltip
+cascade-browser
+Control which URLs the browser can access. Add domains or full URLs to the allowlist.
+Custom path for the browser user profile directory. Leave empty for default (~/.gemini/antigravity-browser-profile).
+Deny setting up browser
+Failed to add URL to allowlist:
+Failed to capture browser console logs:
+Failed to capture browser console logs: No console logs found
+Failed to send browser cancellation interaction
+Failed to send browser confirmation interaction
+Failed to send deny browser setup interaction
+Failed to send open browser setup interaction
+Failed to skip browser subagent:
+Launching the browser...
+Maximum security mode with strict controls. All terminal, artifact, and browser command executions require explicit approval.
+No browser pages open
+Open allowlist
+path-browserify
+setAllowlist
+Site Allowlist
+Specify versions in Browserslist query for browser 
+The Agent attempted to interact with some sites that are not allowlisted
+The agent will wait for you to install the browser extension.
+To use $generateHtmlFromNodes in headless mode please initialize a headless browser implementation such as JSDom before calling this function.
+Transforming files is not supported in browsers
+Unknown browser 
+Unknown browser query `
+uss-browserPreferences
+Write any browsers query (for instance, `defaults`) before `
+You are using the in-browser Babel transformer. Be sure to precompile your scripts for production - https://babeljs.io/docs/setup/
+

@@ -1,0 +1,183 @@
+﻿About
+Active
+Agent Auto-Fix Lints
+Agent Decides
+Agent Gitignore Access
+Agent Manager
+Agent Non-Workspace File Access
+Allow List Terminal Commands
+Allow once
+Always Allow
+Always Proceeds
+Always run
+Archive / Restore
+Ask Agent for Help
+Ask every time
+Ask first
+Asks for Review
+Attach Antigravity server logs
+Auto-Expand Changes Overview
+Auto-Open Edited Files
+Background
+BigInt
+Blocked on Your Input
+Browser CDP Port
+Browser Javascript Execution Policy
+Browser URL Allowlist
+Browser User Profile Path
+Chrome Binary Path
+CitC Clone
+Clipboard Context
+Close
+Close Tab
+Close Workspace
+Code Search
+Complete Onboarding Step
+Complete verification
+Configure
+Confirm
+Confirm Window Reload
+Console Logger
+Console logs
+Conversation
+Conversation History
+Copy
+Copy conversation markdown
+Copy debug info
+Copy File Name
+Copy File Path
+Created At
+Current
+Cut
+Delete Conversation
+Deny
+Deny List Terminal Commands
+Disabled
+Enable
+Enable AI Credit Overages
+Enable Browser Tools
+Enable Demo Mode (Beta)
+Enable Overages
+Enable Shell Integration
+Enable Sounds for Agent
+Enable Telemetry
+Enable Terminal Sandbox
+Enable Workspace API
+Errors
+Explain and Fix in Current Conversation
+Find in Pane
+Flashing Highlight
+Focus Editor
+Focus Input
+Frequency Alerts
+Gemini Computer Use
+Getting scripts...
+Go Back
+Go Forward
+GUID
+Hide Editor
+Highlight After Accept
+JWT
+Knowledge
+KSUID
+Local
+Logs
+Mark as Read
+Mark as Unread
+Marketing Emails
+Marketplace Gallery URL
+Marketplace Item URL
+MCP Servers
+Media
+Mention
+Mention Selection
+Mentions
+Metadata
+Model
+NaN
+New Agent Script
+New Conversation
+New Editor
+New Editor Window
+New Tab
+No Model Selected
+Normal
+Open Agent on Reload
+Open Command Palette
+Open Command Palette (Commands)
+Open Conversation History
+Open Conversation Picker
+Open Folder
+Open Launchpad
+Open Settings
+Open Trajectory
+Open Workspace
+Open Workspace Selector
+Other Conversations
+Output
+Paste
+Previous Conversation
+Promise
+Provide feedback
+Purchase Credits
+Recent
+Recommended
+Redo
+Reject
+Remove
+Rename
+Reset Zoom
+Restart Main Language Server
+Retry
+Review Policy
+Rules
+Run
+Running
+Sandbox Allow Network
+Screen Recording
+Screenshot
+See Plans
+Select All
+Select another model
+Select Model
+Select workspace
+Send feedback as 
+Show Selection Actions
+Skill Custom Paths
+Skills and Customizations
+Source
+Split Terminal
+Start new conversation
+Start Voice Recording
+Status
+Step Type
+Stop Voice Recording
+Strict Mode
+Suggestions in Editor
+Tab Gitignore Access
+Tab Speed
+Tab to Import
+Tab to Jump
+Terminal
+Terminal Command Auto Execution
+Theme
+Toggle collapse sidebar
+Toggle Editor
+Toggle Fullscreen
+Toggle Model Selector
+Toggle Planning Mode
+Toggle Secondary Sidebar
+Toggle Sidebar
+Toggle Terminal
+Tool
+ULID
+Undo
+Unknown
+User
+UUID
+Vim
+Workflows
+Worktree
+XID
+Zoom In
+Zoom Out

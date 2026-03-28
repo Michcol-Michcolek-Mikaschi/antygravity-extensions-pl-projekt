@@ -1,0 +1,82 @@
+﻿Account
+Action required
+Add MCP Servers
+Advanced
+Agent-driven development
+Allowlist
+Antigravity Interactive HTML
+Artifact
+Artifacts
+Automation
+Baseline model quota reached
+Browser
+Capture console logs
+Capture screenshot
+Click to copy full command
+Close
+Close Settings
+Commands
+Comment on this line
+Context
+Copy full URL to clipboard
+Copy trajectory ID
+Custom Agents
+Custom configuration
+Customizations
+Customize Global Skills
+Download Agent State Debug Diagnostics
+Edit
+Enable Notifications
+Error fetching MCP prompt
+File
+File Access
+Files Changed
+Find
+First page
+Full Error
+General
+History
+Installed MCP Servers
+Installed Skills
+Insufficient AI Credits
+Invalid Media
+Knowledge
+Last page
+Learn more
+Marketplace
+MCP Configuration Error:
+MCP Servers
+Mention Page
+Model Credits
+Model Quota
+Model quota reached
+Navigation
+Next page
+Previous page
+Quota
+Refresh quota and credits data
+Refresh skills paths
+Refresh trajectory
+Rerender Tracker
+Review-driven development
+Rules
+Search conversations (by name or Cascade ID)
+Security
+Segment Metrics
+Select Model to Send Message
+Selection Actions
+Skills
+Skills Configuration Error:
+Strict Mode
+Subagents
+Suggestions
+Terminal
+Theme
+Token Usage
+Trajectory Metrics
+UI Actions
+Update Available
+Verification required
+View
+View Page
+Workspace Integration

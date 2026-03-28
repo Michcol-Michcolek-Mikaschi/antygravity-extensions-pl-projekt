@@ -1,0 +1,13 @@
+﻿Artifact
+Browser
+Command Center
+Conversation History
+Custom agent
+Knowledge
+New Conversation
+Open editor
+Provide Feedback
+Review
+Settings
+Skills
+Toggle Sidebar

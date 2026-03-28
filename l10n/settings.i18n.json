@@ -1,0 +1,76 @@
+{
+  "contents": {
+    "package": {
+      "command.openSettings": "Antigravity PL: Spolszczone Ustawienia",
+      "configuration.title": "Antigravity Polski",
+      "configuration.tooltipLanguage.description": "Język tooltipów (podpowiedzi) w rozszerzeniu",
+      "configuration.autoOpenGuide.description": "Automatycznie otwórz przewodnik przy pierwszym uruchomieniu"
+    },
+    "settings/agent": {
+      "conversation.mode": "Tryb konwersacji",
+      "conversation.mode.desc": "Jak agent ma podchodzić do zadań — planując krok po kroku (Planowanie) lub działając od razu (Szybki)",
+      "conversation.mode.planning": "Planowanie",
+      "conversation.mode.planning.desc": "Agent analizuje zadanie, tworzy plan i realizuje go krokami. Bezpieczniejszy dla złożonych zadań.",
+      "conversation.mode.fast": "Szybki",
+      "conversation.mode.fast.desc": "Agent natychmiast przystępuje do implementacji. Szybszy dla prostych zadań.",
+      "artifact.review": "Polityka przeglądu artefaktów",
+      "artifact.review.desc": "Czy agent ma automatycznie stosować zmiany, czy czekać na Twoją akceptację",
+      "artifact.review.auto": "Automatycznie — agent stosuje zmiany bez pytania",
+      "artifact.review.manual": "Ręcznie — agent czeka na Twoją zgodę",
+      "terminal.auto.exec": "Automatyczne wykonywanie w terminalu",
+      "terminal.auto.exec.desc": "Czy agent ma uruchamiać komendy terminalowe bez Twojej zgody",
+      "terminal.allow.list": "Lista dozwolonych komend",
+      "terminal.allow.list.desc": "Komendy, które agent może uruchamiać automatycznie (np. npm test, git status). Jedna na linię.",
+      "terminal.deny.list": "Lista zablokowanych komend",
+      "terminal.deny.list.desc": "Komendy, których agent nie może uruchamiać (np. rm -rf, git push --force). Jedna na linię.",
+      "non.workspace": "Dostęp do plików spoza przestrzeni roboczej",
+      "non.workspace.desc": "Czy agent może czytać i modyfikować pliki poza bieżącym projektem",
+      "reasoning.model": "Model rozumujący",
+      "reasoning.model.desc": "Wybór modelu AI do rozumowania i analizy",
+      "strict.mode": "Tryb ścisły",
+      "strict.mode.desc": "Wymusza restrykcyjne reguły — agent musi potwierdzić każdą operację",
+      "sandboxing": "Piaskownica (Sandboxing)",
+      "sandboxing.desc": "Uruchamia kod agenta w izolowanym środowisku — zwiększa bezpieczeństwo",
+      "rules": "Reguły agenta",
+      "rules.desc": "Instrukcje sterujące zachowaniem agenta — globalne (GEMINI.md) lub lokalne (.agents/rules/)"
+    },
+    "settings/editor": {
+      "tab.completions": "Uzupełnianie tabulatorem",
+      "tab.completions.desc": "Podpowiedzi kodu wyświetlane podczas pisania — akceptuj klawiszem Tab",
+      "command": "Komenda (Ctrl+I / Cmd+I)",
+      "command.desc": "Szybki inline czat z agentem w edytorze — do małych zmian i pytań",
+      "agent.side.panel": "Panel boczny agenta",
+      "agent.side.panel.desc": "Włącz/wyłącz boczny panel z podsumowaniem agenta obok edytora",
+      "review.changes": "Przegląd zmian agenta",
+      "review.changes.desc": "Jak wyświetlać zmiany dokonane przez agenta — inline diff lub Changes Sidebar"
+    },
+    "settings/browser": {
+      "browser.enabled": "Przeglądarka",
+      "browser.enabled.desc": "Włącz wbudowaną przeglądarkę Antigravity do testowania stron web",
+      "browser.subagent": "Sub-agent przeglądarki",
+      "browser.subagent.desc": "Agent może samodzielnie przeglądać strony do zbierania kontekstu",
+      "browser.allowlist": "Lista dozwolonych stron (Allowlist)",
+      "browser.allowlist.desc": "Domeny, które sub-agent przeglądarki może odwiedzać",
+      "browser.chrome.profile": "Profil Chrome",
+      "browser.chrome.profile.desc": "Ścieżka do profilu przeglądarki Chrome używanego przez sub-agenta"
+    },
+    "settings/account": {
+      "telemetry": "Telemetria",
+      "telemetry.desc": "Zbieranie anonimowych danych użytkowania — możesz bezpiecznie wyłączyć",
+      "plan": "Plan subskrypcji",
+      "plan.desc": "Twój plan Google Antigravity określający limity zapytań i modeli",
+      "ai.credits": "Kredyty AI i limity",
+      "ai.credits.desc": "Zarządzanie wydatkami na zapytania AI ponad podstawowy darmowy limit"
+    },
+    "settings/models": {
+      "gemini.3.1.pro": "Gemini 3.1 Pro",
+      "gemini.3.1.pro.desc": "Flagowy model Google — najlepszy do złożonych zadań",
+      "claude.sonnet.4": "Claude Sonnet 4",
+      "claude.sonnet.4.desc": "Model Anthropic — szybki z dobrym rozumowaniem",
+      "claude.opus.4": "Claude Opus 4",
+      "claude.opus.4.desc": "Model Anthropic — najwyższa jakość, wolniejszy",
+      "gpt.oss.120b": "GPT-OSS-120b",
+      "gpt.oss.120b.desc": "Otwartoźródłowy model — darmowy, możliwy do dalszego treningu"
+    }
+  }
+}

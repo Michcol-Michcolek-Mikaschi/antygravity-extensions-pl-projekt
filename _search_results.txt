@@ -1,0 +1,378 @@
+A new workspace will be created for you when you start a conversation
+Accept
+Accept all
+Actual behavior
+Add
+Add Model
+Add them to allow future interactions
+Advanced settings
+Agent A
+Agent B
+Agent C
+Agent Decides
+Agent Manager
+Agent Script Command Configuration
+Agent State Debug
+AI Credits Used to Generate Response
+Allow Once
+Allow This Conversation
+Alt text:
+Always Proceed
+An error ID that helps the team investigate the error.
+An error was thrown.
+Analyzed
+Antigravity would like to use the browser.
+Any error messages
+Any error messages seen when trying to log in
+Any relevant information
+Are you sure you want to delete this conversation? This action cannot be undone.
+Arguments Schema:
+Artifact Comments
+Artifact Name
+Artifacts are created when the agent performs more complex, longer running tasks while in Planning mode.
+Attach a screenshot (optional)
+Attach the trajectory ID to the feedback form
+Attaching logs requires an email address
+Back
+Bad response
+Before you begin
+Blocked
+Browser allowlist begins with localhost and can be updated through the settings page.
+Bytes
+Cancel
+Cancel command
+Cancel step
+Chat History
+Chat Model Metadata
+Choose an option with \u2190\u2192 or by clicking a theme.
+Choose your theme
+Clear
+Cleared Count
+Click here to learn more
+Close
+Close (Escape)
+Close Folder
+Collapse All
+Command
+Command Line
+Comment
+Comments
+Configure
+Configure Your Editor
+Configure your editor settings below.
+Configure your keybindings.
+Confirm Undo
+Confirmation required to execute this step
+Connect to Remote Workspace
+Conversation
+Conversation mode
+Convert to Google Doc
+Copied
+Copy command
+Copy the trajectory ID
+Count
+Create
+Create multiple agents to tackle different tasks in an agent-first UX.
+Created:
+Custom
+Custom models are only supported on Cloudtop / Linux machines.
+Customization token usage
+Customizations feature is currently only available for the desktop app.
+Debug Mode
+Debug Sidebar
+Decline
+Defined subagent
+Delete
+Delete Conversation
+Denied Sites
+Deny
+Description
+Description:
+Details
+Dev Mode
+Disabled
+Disabled in strict mode
+Dismiss
+Document Answers
+Drop to add to Agent
+Edit
+Edit Model
+Editor
+Editor Settings
+Editor Window
+Email
+Enter the required configuration values to install this MCP server.
+Enter your Google Cloud project ID
+Environment
+Error
+Error Details
+Error Details:
+Error loading Browser recording
+Error rendering playback
+Execute Javascript policy
+Expand
+Expand All
+Expected behavior
+Extensions
+Failed to load conversation
+Failed to load image
+Failed to move changes
+FAQ
+Features
+Feedback
+Feedback Type
+Fetched network request for page.
+Fetched network requests for page.
+File Comments
+File Diff Comments
+File no longer exists
+Files Modified
+Files to edit:
+Filter
+Focus Editor
+Forward
+Found references to
+Full Metadata
+Full output written to
+Get More AI Credits
+Global
+Goal
+Good response
+Google Privacy Policy
+Having trouble? Let us know
+Hide 0s
+Hide Editor
+History
+How this feature would help you and other users
+Image Answers
+Image Diff Not Supported
+Image rendering blocked (strict mode enabled)
+Image URL:
+Images
+Input
+Inspected commit
+Install
+Installed
+JavaScript execution policy
+JavaScript Result
+Keybindings
+Knowledge feature is not available.
+Knowledge Generation
+Last Updated
+Launch
+Launching the browser...
+Learn more
+Learn more.
+License:
+List resources: 
+Loading Browser recording...
+Loading conversation...
+Loading custom agents...
+Loading knowledge items...
+Loading MCP servers...
+Loading metrics...
+Loading models...
+Loading skills...
+Loading...
+LS Output Debug View
+Match case (Aa)
+Match whole word (ab)
+Max Tokens
+MCP Error
+MCP Servers Disabled
+MCP Tool: 
+Metadata:
+Metric
+Model
+Model Label
+Model URL
+Models Tab
+Mouse button pressed
+Mouse button released
+Multi-conversation view is not available
+New
+Next
+Next match (Enter)
+No agent changes to display
+No artifacts generated.
+No browser pages open
+No cascade ID provided
+No chat model metadata available for this generator
+No chat model metadata available in latest generator metadata
+No chats yet
+No content available for this resource
+No Custom Agents or Plugins
+No customizations found for this workspace.
+No file changes
+No generator metadata available
+No internet. Agent features may not work.
+No items found
+No Javascript Result Output
+No matching results
+No MCP Servers
+No message prompts available
+No models available
+No resources available
+No results found
+No skills loaded.
+No subagents
+No token data available.
+No tracked components
+No workspaces yet
+Not Found
+Not signed in
+Notification Settings
+Open
+Open allowlist
+Open an artifact from the left pane to view its content here.
+Open Diff
+Open Editor
+Open Editor Settings
+Open extracted DOM in editor
+Open local folder
+Open MCP Config
+Open remote folder
+Open Setup Window
+Open SSH connection in setup window. When finished, you will be able to select the workspace in the sidebar.
+Open System Browser
+Open System Preferences
+Open URL
+Output
+Page contents
+Pending messages
+Playback available
+Preview
+Preview unavailable
+Previous
+Previous match (Shift+Enter)
+Proceed
+Proceeded with
+Process Details
+Prompt
+Provide Feedback
+Python Coming Soon
+Python Script
+Read resource: 
+Read URL content?
+Read URL rejected
+Recent actions
+Recent Remote Workspaces
+RECOMMENDED
+Refresh
+Refresh skills
+Reject
+Reject all
+Rejected MCP tool
+Reload Window
+Rename
+Rendered Step:
+Rendering playback
+Request Review
+Rerender Effects
+Rerenders Per Second
+Retry
+Review
+Review Changes
+Review policy
+Run MCP tool call?
+Save
+Saves to your global ~/.gemini/antigravity/agents/ directory. This script will be available across all your workspaces.
+Scanning skills config file...
+Screenshot must be under 10 MB
+Search for MCP servers to add to your configuration
+Searched\xA0
+See Activity
+Select an option...
+Select one of the options below.
+Select text in the artifact to add a comment
+Send
+Send Feedback
+Set up your workspace in the Agent Manager.
+Setting Up Your Account
+Setup
+Sherlog Links
+Show 0s
+Show items analyzed
+Show more
+Sign in
+Sign in with a different account
+Sign into Google
+Sign out
+Skills
+Skills are instructions that extend what Agent can do.
+Skip
+Skipped
+Some non-image binary content was truncated.
+Something went wrong
+Something went wrong!
+Source:
+Sources
+Step JSON:
+Step Type
+Step:
+Steps to Reproduce
+Steps to reproduce the issue
+Submit
+Submitting...
+Suggested Actions
+System Message
+Tasks can be done either in your agent manager or in an AI-powered editor.
+Terminal execution policy
+Terms of Service
+Thanks for your feedback!
+The Agent attempted to interact with some sites that are not allowlisted
+The agent has not generated any knowledge items yet.
+The agent manager is a new window allowing you to manage and create agents across workspaces.
+The agent was prevented from accessing some sites
+The agent will frequently ask for review.
+The agent will never request for review.
+The agent will wait for you to install the browser extension.
+The associated worktree will also be deleted.
+The editor is an AI-powered IDE with code suggestions, a context-aware agent side panel, and more.
+There was an unexpected issue setting up your account.
+Thinking
+This skill is installed in your workspace
+Thought Process
+Title:
+To modify editor settings, open Settings within the editor window.
+To modify notification settings, open your operating system's system preferences.
+To provide feedback
+Tool Calls
+Tool: 
+Trajectory Debug View
+Trajectory ID
+Trajectory Stats
+Transpilation Error:
+Transpiling React app...
+Unable to determine quota
+Unknown edit
+Unknown file edit
+Use a GCP project instead
+Use regular expression (.*)
+Use the editor when you want to write code or focus on one task alongside one agent.
+Value
+View
+View could not be opened
+View customizations
+View Diff
+View documentation
+View MCP settings
+View network request
+View network requests
+View Page
+View plans
+Viewing Subagent
+Visible only
+We recommend attaching logs. Attaching logs will help the Antigravity team act on and prioritize your feedback.
+Welcome to the Agent Manager
+What functionality you expect your account tier to have available that is missing
+What is missing in your workflow
+What quota or feature is being incorrectly limited
+What went wrong?
+What you would like to see to address this gap in your workflow
+When debug mode is on, you can see additional information about each steps in the conversation.
+When exploring an untrusted workspace with the agent, we recommend enabling strict mode via the settings window.
+Workspace
+Workspaces
+You currently don't have any MCP Servers installed. Add a MCP tool below or add a custom one via the MCP Config.
+Your administrator has disabled MCP servers for this workspace.

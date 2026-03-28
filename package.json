@@ -1,0 +1,143 @@
+{
+  "name": "antigravity-polish-pack",
+  "displayName": "Antigravity Polski — Spolszczenie + Poradnik",
+  "description": "Pełne spolszczenie modułów Agent Manager i Ustawień Google Antigravity. Zawiera polskie opisy, tooltips z wyjaśnieniami oraz interaktywny poradnik dla początkujących.",
+  "version": "0.5.0",
+  "publisher": "antigravity-pl-community",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Language Packs",
+    "Education",
+    "Other"
+  ],
+  "keywords": [
+    "polish",
+    "polski",
+    "spolszczenie",
+    "antigravity",
+    "google",
+    "language pack",
+    "localization",
+    "agent manager",
+    "poradnik",
+    "tutorial"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/user/antigravity-polish-pack"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "antigravityPL.applyPatch",
+        "title": "Antigravity PL: ✨ Spolszcz interfejs Antigravity",
+        "category": "Antigravity Polski"
+      },
+      {
+        "command": "antigravityPL.restoreOriginal",
+        "title": "Antigravity PL: Przywróć angielski interfejs",
+        "category": "Antigravity Polski"
+      },
+      {
+        "command": "antigravityPL.checkStatus",
+        "title": "Antigravity PL: Sprawdź stan spolszczenia",
+        "category": "Antigravity Polski"
+      },
+      {
+        "command": "antigravityPL.openSettings",
+        "title": "Antigravity PL: Otwórz Spolszczone Ustawienia",
+        "category": "Antigravity Polski"
+      },
+      {
+        "command": "antigravityPL.openAgentManager",
+        "title": "Antigravity PL: Menedżer Agentów — Przewodnik PL",
+        "category": "Antigravity Polski"
+      },
+      {
+        "command": "antigravityPL.openRoadmap",
+        "title": "Antigravity PL: Roadmapa — Jak stworzyć rozszerzenie",
+        "category": "Antigravity Polski"
+      },
+      {
+        "command": "antigravityPL.openQuickRef",
+        "title": "Antigravity PL: Szybka ściągawka tłumaczeń",
+        "category": "Antigravity Polski"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        { "command": "antigravityPL.applyPatch" },
+        { "command": "antigravityPL.restoreOriginal" },
+        { "command": "antigravityPL.checkStatus" },
+        { "command": "antigravityPL.openSettings" },
+        { "command": "antigravityPL.openAgentManager" },
+        { "command": "antigravityPL.openRoadmap" },
+        { "command": "antigravityPL.openQuickRef" }
+      ]
+    },
+    "configuration": {
+      "title": "Antigravity Polski — Ustawienia",
+      "properties": {
+        "antigravityPL.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Pokaż skrót do polskiego panelu w pasku stanu (na dole ekranu)"
+        },
+        "antigravityPL.autoOpenGuide": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatycznie otwieraj przewodnik po polsku przy starcie nowego obszaru roboczego"
+        },
+        "antigravityPL.tooltipLanguage": {
+          "type": "string",
+          "default": "pl",
+          "enum": ["pl", "pl-en"],
+          "enumDescriptions": [
+            "Tylko po polsku",
+            "Po polsku z oryginałem angielskim w nawiasie"
+          ],
+          "description": "Język tooltipów — sam polski lub polski z angielskim oryginałem"
+        }
+      }
+    },
+    "localizations": [
+      {
+        "languageId": "pl",
+        "languageName": "Polish",
+        "localizedLanguageName": "Polski",
+        "translations": [
+          {
+            "id": "antigravity.agentManager",
+            "path": "./l10n/agent-manager.i18n.json"
+          },
+          {
+            "id": "antigravity.settings",
+            "path": "./l10n/settings.i18n.json"
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "publish:ovsx": "ovsx publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0",
+    "ovsx": "^0.8.0"
+  }
+}

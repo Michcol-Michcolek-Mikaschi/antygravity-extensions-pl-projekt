@@ -1,0 +1,6 @@
+﻿Command Center
+Conversation History
+Delete
+New Conversation
+Settings
+Split

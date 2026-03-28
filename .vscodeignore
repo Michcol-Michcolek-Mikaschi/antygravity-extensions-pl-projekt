@@ -1,0 +1,12 @@
+.vscode/**
+src/**
+node_modules/**
+tsconfig.json
+.gitignore
+*.map
+**/*.ts
+_res_*
+_search*
+_check*
+miss_list.txt
+*.ps1
