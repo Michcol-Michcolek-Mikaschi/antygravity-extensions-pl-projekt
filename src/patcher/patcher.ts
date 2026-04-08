@@ -9,46 +9,63 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
 import { getAllTranslations, TranslationEntry } from './translations';
+import {
+    CoreLocalizationPaths,
+    applyCoreLocalizationFromLanguagePack,
+    getCorePatchStatus,
+    restoreCoreLocalizationBackups
+} from './core-localization';
 
-interface AntigravityPaths {
+interface AntigravityPaths extends CoreLocalizationPaths {
+    appRoot: string;
     jetskiMain: string;
     backup: string;
     productJson: string;
 }
 
-// Ścieżka do pliku Agent Managera (React SPA z UI Settings + Agent Manager)
+// Ścieżki do plików patchowanych przez rozszerzenie.
 function getAntigravityPaths(): AntigravityPaths | null {
-    // Windows: AppData\Local\Programs\Antigravity
     const localAppData = process.env.LOCALAPPDATA || '';
-    const basePath = path.join(localAppData, 'Programs', 'Antigravity', 'resources', 'app', 'out', 'jetskiAgent');
-    const mainJs = path.join(basePath, 'main.js');
-    const backupJs = path.join(basePath, 'main.js.backup-pl');
-    const productJson = path.join(localAppData, 'Programs', 'Antigravity', 'resources', 'app', 'product.json');
-
-    if (fs.existsSync(mainJs)) {
-        return { jetskiMain: mainJs, backup: backupJs, productJson };
+    const windowsAppRoot = path.join(localAppData, 'Programs', 'Antigravity', 'resources', 'app');
+    const windows = buildPathsForAppRoot(windowsAppRoot);
+    if (windows) {
+        return windows;
     }
 
-    // macOS: /Applications/Antigravity.app/Contents/Resources/app/out/jetskiAgent
-    const macPath = '/Applications/Antigravity.app/Contents/Resources/app/out/jetskiAgent';
-    const macMain = path.join(macPath, 'main.js');
-    const macBackup = path.join(macPath, 'main.js.backup-pl');
-    const macProduct = '/Applications/Antigravity.app/Contents/Resources/app/product.json';
-    if (fs.existsSync(macMain)) {
-        return { jetskiMain: macMain, backup: macBackup, productJson: macProduct };
+    const macAppRoot = '/Applications/Antigravity.app/Contents/Resources/app';
+    const mac = buildPathsForAppRoot(macAppRoot);
+    if (mac) {
+        return mac;
     }
 
-    // Linux: ~/.local/share/antigravity (lub /usr/share/antigravity)
     const home = process.env.HOME || '';
-    const linuxPath = path.join(home, '.local', 'share', 'antigravity', 'resources', 'app', 'out', 'jetskiAgent');
-    const linuxMain = path.join(linuxPath, 'main.js');
-    const linuxBackup = path.join(linuxPath, 'main.js.backup-pl');
-    const linuxProduct = path.join(home, '.local', 'share', 'antigravity', 'resources', 'app', 'product.json');
-    if (fs.existsSync(linuxMain)) {
-        return { jetskiMain: linuxMain, backup: linuxBackup, productJson: linuxProduct };
+    const linuxAppRoot = path.join(home, '.local', 'share', 'antigravity', 'resources', 'app');
+    const linux = buildPathsForAppRoot(linuxAppRoot);
+    if (linux) {
+        return linux;
     }
 
     return null;
+}
+
+function buildPathsForAppRoot(appRoot: string): AntigravityPaths | null {
+    const outRoot = path.join(appRoot, 'out');
+    const jetskiMain = path.join(outRoot, 'jetskiAgent', 'main.js');
+    if (!fs.existsSync(jetskiMain)) {
+        return null;
+    }
+
+    return {
+        appRoot,
+        outRoot,
+        extensionsRoot: path.join(appRoot, 'extensions'),
+        nlsMessages: path.join(outRoot, 'nls.messages.json'),
+        nlsMessagesBackup: path.join(outRoot, 'nls.messages.json.backup-pl'),
+        nlsKeys: path.join(outRoot, 'nls.keys.json'),
+        jetskiMain,
+        backup: path.join(outRoot, 'jetskiAgent', 'main.js.backup-pl'),
+        productJson: path.join(appRoot, 'product.json')
+    };
 }
 
 export interface PatchResult {
@@ -145,6 +162,7 @@ export function applyPolishPatch(): PatchResult {
     let exactApplied = 0;
     let regexApplied = 0;
     const details: string[] = [];
+    const changedFiles = new Set<string>();
 
     if (duplicateConflicts.length > 0) {
         ambiguous += duplicateConflicts.length;
@@ -223,6 +241,7 @@ export function applyPolishPatch(): PatchResult {
     if (replaced > 0) {
         try {
             fs.writeFileSync(paths.jetskiMain, content, 'utf-8');
+            changedFiles.add(paths.jetskiMain);
         } catch (err) {
             return {
                 success: false,
@@ -236,22 +255,35 @@ export function applyPolishPatch(): PatchResult {
                 details
             };
         }
+    }
 
-        // Aktualizuj checksum w product.json, aby uniknąć ostrzeżenia "instalacja uszkodzona"
+    // Spolszczenie rdzenia UI (menu, settings) + rozszerzeń wbudowanych (np. Git).
+    const coreResult = applyCoreLocalizationFromLanguagePack(paths);
+    details.push(...coreResult.details);
+    for (const file of coreResult.changedFiles) {
+        changedFiles.add(file);
+    }
+
+    // Aktualizuj checksumy wszystkich plików, które są objęte wpisami w product.json.
+    if (changedFiles.size > 0) {
         try {
-            updateProductChecksum(paths, content);
-            details.push('✅ Zaktualizowano checksum w product.json');
+            const updatedChecksums = updateProductChecksums(paths, Array.from(changedFiles));
+            if (updatedChecksums > 0) {
+                details.push(`✅ Zaktualizowano checksumy w product.json (${updatedChecksums} plików)`);
+            }
         } catch (err) {
-            details.push(`⚠️ Nie udało się zaktualizować checksumu: ${err}`);
+            details.push(`⚠️ Nie udało się zaktualizować checksumów: ${err}`);
         }
     }
 
+    const totalReplaced = replaced + coreResult.coreReplacedCount + coreResult.extensionReplacedCount;
+
     return {
         success: true,
-        message: replaced > 0
-            ? `Spolszczono ${replaced} elementów interfejsu! Uruchom ponownie Antigravity, aby zobaczyć zmiany.`
+        message: totalReplaced > 0
+            ? `Spolszczono ${totalReplaced} elementów interfejsu! Uruchom ponownie Antigravity, aby zobaczyć zmiany.`
             : 'Interfejs jest już spolszczony — nie trzeba nic zmieniać.',
-        replacedCount: replaced,
+        replacedCount: totalReplaced,
         skippedCount: skipped,
         unmatchedCount: unmatched,
         ambiguousCount: ambiguous,
@@ -262,12 +294,11 @@ export function applyPolishPatch(): PatchResult {
 }
 
 /**
- * Aktualizuje checksum pliku jetskiAgent/main.js w product.json.
- * Zapobiega ostrzeżeniu "instalacja jest uszkodzona" po patchowaniu.
+ * Aktualizuje checksumy patchowanych plików, jeśli występują w product.json.
  */
-function updateProductChecksum(paths: AntigravityPaths, fileContent: string): void {
+function updateProductChecksums(paths: AntigravityPaths, changedFiles: string[]): number {
     if (!fs.existsSync(paths.productJson)) {
-        return;
+        return 0;
     }
 
     // Backup product.json (tylko raz)
@@ -276,14 +307,34 @@ function updateProductChecksum(paths: AntigravityPaths, fileContent: string): vo
         fs.copyFileSync(paths.productJson, productBackup);
     }
 
-    const hash = crypto.createHash('sha256').update(fileContent).digest('base64');
     const productRaw = fs.readFileSync(paths.productJson, 'utf-8');
     const product = JSON.parse(productRaw);
 
-    if (product.checksums && product.checksums['jetskiAgent/main.js']) {
-        product.checksums['jetskiAgent/main.js'] = hash;
+    if (!product.checksums || typeof product.checksums !== 'object') {
+        return 0;
+    }
+
+    let updated = 0;
+    for (const changedFile of changedFiles) {
+        if (!fs.existsSync(changedFile)) {
+            continue;
+        }
+
+        const key = resolveChecksumKey(paths, changedFile);
+        if (!key || !Object.prototype.hasOwnProperty.call(product.checksums, key)) {
+            continue;
+        }
+
+        const hash = crypto.createHash('sha256').update(fs.readFileSync(changedFile)).digest('base64');
+        product.checksums[key] = hash;
+        updated++;
+    }
+
+    if (updated > 0) {
         fs.writeFileSync(paths.productJson, JSON.stringify(product, null, '\t'), 'utf-8');
     }
+
+    return updated;
 }
 
 /**
@@ -305,27 +356,40 @@ export function restoreOriginal(): PatchResult {
         };
     }
 
-    if (!fs.existsSync(paths.backup)) {
-        return {
-            success: false,
-            message: 'Nie znaleziono kopii zapasowej — oryginalny plik nie był modyfikowany lub backup został usunięty.',
-            replacedCount: 0,
-            skippedCount: 0,
-            unmatchedCount: 0,
-            ambiguousCount: 0,
-            exactAppliedCount: 0,
-            regexAppliedCount: 0,
-            details: []
-        };
-    }
-
     try {
-        fs.copyFileSync(paths.backup, paths.jetskiMain);
+        let restoredFiles = 0;
+        const details: string[] = [];
+
+        if (fs.existsSync(paths.backup)) {
+            fs.copyFileSync(paths.backup, paths.jetskiMain);
+            restoredFiles++;
+            details.push('Przywrócono jetskiAgent/main.js');
+        }
+
+        const coreRestore = restoreCoreLocalizationBackups(paths);
+        restoredFiles += coreRestore.restoredFiles;
+        details.push(...coreRestore.details);
 
         // Przywróć oryginalny product.json
         const productBackup = paths.productJson + '.backup-pl';
         if (fs.existsSync(productBackup)) {
             fs.copyFileSync(productBackup, paths.productJson);
+            restoredFiles++;
+            details.push('Przywrócono product.json');
+        }
+
+        if (restoredFiles === 0) {
+            return {
+                success: false,
+                message: 'Nie znaleziono żadnych kopii zapasowych .backup-pl do przywrócenia.',
+                replacedCount: 0,
+                skippedCount: 0,
+                unmatchedCount: 0,
+                ambiguousCount: 0,
+                exactAppliedCount: 0,
+                regexAppliedCount: 0,
+                details: []
+            };
         }
 
         return {
@@ -337,7 +401,7 @@ export function restoreOriginal(): PatchResult {
             ambiguousCount: 0,
             exactAppliedCount: 0,
             regexAppliedCount: 0,
-            details: ['Backup przywrócony pomyślnie']
+            details
         };
     } catch (err) {
         return {
@@ -386,18 +450,25 @@ export function checkPatchStatus(): { patched: boolean; canPatch: boolean; detai
         }
     }
 
-    const total = polishFound + englishFound;
-    if (polishFound === total && total > 0) {
-        return { patched: true, canPatch: true, details: `Interfejs w pełni po polsku (${polishFound} elementów).` };
-    } else if (englishFound === total && total > 0) {
-        return { patched: false, canPatch: true, details: `Interfejs po angielsku — gotowy do spolszczenia (${total} elementów).` };
-    } else {
-        return {
-            patched: false,
-            canPatch: true,
-            details: `Stan mieszany: ${polishFound} PL / ${englishFound} EN. Uruchom patchowanie ponownie.`
-        };
+    const coreStatus = getCorePatchStatus(paths);
+
+    const totalPolish = polishFound + coreStatus.polishFound;
+    const totalEnglish = englishFound + coreStatus.englishFound;
+    const details = `Agent UI: ${polishFound} PL / ${englishFound} EN | ${coreStatus.details}`;
+
+    if (totalEnglish === 0 && totalPolish > 0) {
+        return { patched: true, canPatch: true, details: `Interfejs w pełni po polsku. ${details}` };
     }
+
+    if (totalPolish === 0 && totalEnglish > 0) {
+        return { patched: false, canPatch: true, details: `Interfejs po angielsku — gotowy do spolszczenia. ${details}` };
+    }
+
+    return {
+        patched: false,
+        canPatch: true,
+        details: `Stan mieszany. ${details}`
+    };
 }
 
 function prepareTranslations(entries: TranslationEntry[]): PreparedTranslation[] {
@@ -502,6 +573,24 @@ function countOccurrences(content: string, search: string): number {
         return 0;
     }
     return content.split(search).length - 1;
+}
+
+function resolveChecksumKey(paths: AntigravityPaths, absolutePath: string): string | null {
+    const outRelative = path.relative(paths.outRoot, absolutePath);
+    if (!outRelative.startsWith('..') && !path.isAbsolute(outRelative)) {
+        return toPosixPath(outRelative);
+    }
+
+    const appRelative = path.relative(paths.appRoot, absolutePath);
+    if (!appRelative.startsWith('..') && !path.isAbsolute(appRelative)) {
+        return toPosixPath(appRelative);
+    }
+
+    return null;
+}
+
+function toPosixPath(value: string): string {
+    return value.split(path.sep).join('/');
 }
 
 function truncate(value: string, max = 80): string {

@@ -934,8 +934,8 @@ export const additionalUpdateTranslations: TranslationEntry[] = [
     { en: 'To modify editor settings, open Settings within the editor window.', pl: 'Aby zmienić ustawienia edytora, otwórz Ustawienia w oknie edytora.' },
     { en: 'Use the editor when you want to write code or focus on one task alongside one agent.', pl: 'Używaj edytora, gdy chcesz pisać kod lub skupić się na jednym zadaniu razem z jednym agentem.' },
     { en: 'Provide Feedback', pl: 'Prześlij opinię' },
-    { en: 'Settings', pl: 'Ustawienia' },
-    { en: 'Knowledge', pl: 'Wiedza' },
+    { en: '"Settings"', pl: '"Ustawienia"' },
+    { en: '"Knowledge"', pl: '"Wiedza"' },
 ];
 
 export const diagnosticsTranslations: TranslationEntry[] = [

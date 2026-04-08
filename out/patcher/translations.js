@@ -911,8 +911,8 @@ exports.additionalUpdateTranslations = [
     { en: 'To modify editor settings, open Settings within the editor window.', pl: 'Aby zmienić ustawienia edytora, otwórz Ustawienia w oknie edytora.' },
     { en: 'Use the editor when you want to write code or focus on one task alongside one agent.', pl: 'Używaj edytora, gdy chcesz pisać kod lub skupić się na jednym zadaniu razem z jednym agentem.' },
     { en: 'Provide Feedback', pl: 'Prześlij opinię' },
-    { en: 'Settings', pl: 'Ustawienia' },
-    { en: 'Knowledge', pl: 'Wiedza' },
+    { en: '"Settings"', pl: '"Ustawienia"' },
+    { en: '"Knowledge"', pl: '"Wiedza"' },
 ];
 exports.diagnosticsTranslations = [
     { en: '"A new workspace will be created for you when you start a conversation"', pl: '"Po rozpoczęciu rozmowy zostanie utworzony nowy obszar roboczy."' },
