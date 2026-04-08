@@ -4,6 +4,8 @@ export interface CoreLocalizationPaths {
     nlsMessages: string;
     nlsMessagesBackup: string;
     nlsKeys: string;
+    getBackupPathFor?: (targetPath: string) => string;
+    getLegacyBackupPathFor?: (targetPath: string) => string | null;
 }
 export interface CoreLocalizationResult {
     success: boolean;

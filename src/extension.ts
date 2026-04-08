@@ -22,7 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
         async () => {
             const confirm = await vscode.window.showWarningMessage(
                 'Czy chcesz spolszczyć interfejs Antigravity? Zmienione zostaną panele Settings i Agent Manager.\n\n' +
-                '⚠️ Antigravity musi być ZAMKNIĘTY podczas patchowania. Po zastosowaniu zmian uruchom go ponownie.',
+                '⚠️ Najbezpieczniej patchować przy zamkniętym Antigravity. Jeśli uruchamiasz patch z poziomu Antigravity, może pojawić się chwilowy komunikat o modyfikacji instalacji do czasu restartu.',
                 { modal: true },
                 'Tak, spolszcz',
                 'Anuluj'
@@ -48,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
         async () => {
             const confirm = await vscode.window.showWarningMessage(
                 'Przywrócić oryginalny angielski interfejs Antigravity?\n\n' +
-                '⚠️ Antigravity musi być zamknięty. Po przywróceniu uruchom go ponownie.',
+                '⚠️ Najbezpieczniej przywracać przy zamkniętym Antigravity. Po przywróceniu uruchom go ponownie.',
                 { modal: true },
                 'Tak, przywróć angielski',
                 'Anuluj'

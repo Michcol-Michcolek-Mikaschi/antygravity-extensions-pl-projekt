@@ -8,6 +8,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
+import { execFileSync } from 'child_process';
 import { getAllTranslations, TranslationEntry } from './translations';
 import {
     CoreLocalizationPaths,
@@ -18,9 +19,11 @@ import {
 
 interface AntigravityPaths extends CoreLocalizationPaths {
     appRoot: string;
+    backupRoot: string;
     jetskiMain: string;
     backup: string;
     productJson: string;
+    productJsonBackup: string;
 }
 
 // Ścieżki do plików patchowanych przez rozszerzenie.
@@ -55,17 +58,76 @@ function buildPathsForAppRoot(appRoot: string): AntigravityPaths | null {
         return null;
     }
 
+    const backupRoot = getBackupRootForInstallation(appRoot);
+    const getBackupPathFor = (targetPath: string) => resolveExternalBackupPath(appRoot, backupRoot, targetPath);
+    const getLegacyBackupPathFor = (targetPath: string): string | null => {
+        const relative = path.relative(appRoot, targetPath);
+        if (relative.startsWith('..') || path.isAbsolute(relative)) {
+            return null;
+        }
+        return targetPath + '.backup-pl';
+    };
+
     return {
         appRoot,
+        backupRoot,
         outRoot,
         extensionsRoot: path.join(appRoot, 'extensions'),
         nlsMessages: path.join(outRoot, 'nls.messages.json'),
-        nlsMessagesBackup: path.join(outRoot, 'nls.messages.json.backup-pl'),
+        nlsMessagesBackup: getBackupPathFor(path.join(outRoot, 'nls.messages.json')),
         nlsKeys: path.join(outRoot, 'nls.keys.json'),
         jetskiMain,
-        backup: path.join(outRoot, 'jetskiAgent', 'main.js.backup-pl'),
-        productJson: path.join(appRoot, 'product.json')
+        backup: getBackupPathFor(jetskiMain),
+        productJson: path.join(appRoot, 'product.json'),
+        productJsonBackup: getBackupPathFor(path.join(appRoot, 'product.json')),
+        getBackupPathFor,
+        getLegacyBackupPathFor
     };
+}
+
+function getBackupRootForInstallation(appRoot: string): string {
+    const globalBackupRoot = getGlobalBackupRoot();
+    const installationId = crypto
+        .createHash('sha1')
+        .update(normalizePathForCompare(appRoot))
+        .digest('hex')
+        .slice(0, 12);
+
+    return path.join(globalBackupRoot, 'installations', installationId);
+}
+
+function getGlobalBackupRoot(): string {
+    if (process.platform === 'win32') {
+        const appData = process.env.APPDATA || process.env.LOCALAPPDATA || process.cwd();
+        return path.join(appData, 'AntigravityPL', 'backups');
+    }
+
+    if (process.platform === 'darwin') {
+        const home = process.env.HOME || process.cwd();
+        return path.join(home, 'Library', 'Application Support', 'AntigravityPL', 'backups');
+    }
+
+    const xdgStateHome = process.env.XDG_STATE_HOME;
+    if (xdgStateHome && xdgStateHome.length > 0) {
+        return path.join(xdgStateHome, 'antigravity-pl', 'backups');
+    }
+
+    const home = process.env.HOME || process.cwd();
+    return path.join(home, '.local', 'state', 'antigravity-pl', 'backups');
+}
+
+function resolveExternalBackupPath(appRoot: string, backupRoot: string, targetPath: string): string {
+    const relative = path.relative(appRoot, targetPath);
+    if (!relative.startsWith('..') && !path.isAbsolute(relative)) {
+        return path.join(backupRoot, relative + '.backup-pl');
+    }
+
+    const externalId = crypto
+        .createHash('sha1')
+        .update(normalizePathForCompare(targetPath))
+        .digest('hex')
+        .slice(0, 20);
+    return path.join(backupRoot, 'external', `${externalId}.backup-pl`);
 }
 
 export interface PatchResult {
@@ -93,6 +155,19 @@ interface DuplicateConflict {
     translations: string[];
 }
 
+interface RuntimePatchGuardResult {
+    canProceed: boolean;
+    reason?: string;
+    advisory?: string;
+}
+
+interface ChecksumUpdateResult {
+    updated: number;
+    normalized: number;
+    scannedCandidates: number;
+    missingKeys: number;
+}
+
 /**
  * Aplikuje polskie tłumaczenia do pliku main.js Agent Managera.
  * Tworzy backup przed pierwszą zmianą. Idempotentna — można uruchomić wielokrotnie. 
@@ -113,11 +188,30 @@ export function applyPolishPatch(): PatchResult {
         };
     }
 
+    const details: string[] = [];
+    const runtimeGuard = evaluateRuntimePatchGuard(paths);
+    if (runtimeGuard.advisory) {
+        details.push(runtimeGuard.advisory);
+    }
+    if (!runtimeGuard.canProceed) {
+        return {
+            success: false,
+            message: runtimeGuard.reason ?? 'Nie można bezpiecznie wykonać patchowania.',
+            replacedCount: 0,
+            skippedCount: 0,
+            unmatchedCount: 0,
+            ambiguousCount: 0,
+            exactAppliedCount: 0,
+            regexAppliedCount: 0,
+            details
+        };
+    }
+
     // Odczytaj plik — ZAWSZE z backupu (oryginał EN) jeśli istnieje
     let content: string;
     try {
         // Jeśli backup istnieje, czytamy z niego (czysty EN) i nadpisujemy main.js
-        const sourceFile = fs.existsSync(paths.backup) ? paths.backup : paths.jetskiMain;
+        const sourceFile = findExistingBackup(paths, paths.jetskiMain, paths.backup) ?? paths.jetskiMain;
         content = fs.readFileSync(sourceFile, 'utf-8');
     } catch (err) {
         return {
@@ -129,27 +223,25 @@ export function applyPolishPatch(): PatchResult {
             ambiguousCount: 0,
             exactAppliedCount: 0,
             regexAppliedCount: 0,
-            details: []
+            details
         };
     }
 
     // Utwórz backup (tylko jeśli nie istnieje — zachowaj oryginalny angielski)
-    if (!fs.existsSync(paths.backup)) {
-        try {
-            fs.copyFileSync(paths.jetskiMain, paths.backup);
-        } catch (err) {
-            return {
-                success: false,
-                message: `Nie można utworzyć kopii zapasowej: ${err}`,
-                replacedCount: 0,
-                skippedCount: 0,
-                unmatchedCount: 0,
-                ambiguousCount: 0,
-                exactAppliedCount: 0,
-                regexAppliedCount: 0,
-                details: []
-            };
-        }
+    try {
+        ensureBackupFile(paths, paths.jetskiMain, paths.backup);
+    } catch (err) {
+        return {
+            success: false,
+            message: `Nie można utworzyć kopii zapasowej: ${err}`,
+            replacedCount: 0,
+            skippedCount: 0,
+            unmatchedCount: 0,
+            ambiguousCount: 0,
+            exactAppliedCount: 0,
+            regexAppliedCount: 0,
+            details
+        };
     }
 
     const preparedTranslations = prepareTranslations(getAllTranslations());
@@ -161,7 +253,6 @@ export function applyPolishPatch(): PatchResult {
     let ambiguous = 0;
     let exactApplied = 0;
     let regexApplied = 0;
-    const details: string[] = [];
     const changedFiles = new Set<string>();
 
     if (duplicateConflicts.length > 0) {
@@ -264,16 +355,31 @@ export function applyPolishPatch(): PatchResult {
         changedFiles.add(file);
     }
 
-    // Aktualizuj checksumy wszystkich plików, które są objęte wpisami w product.json.
-    if (changedFiles.size > 0) {
-        try {
-            const updatedChecksums = updateProductChecksums(paths, Array.from(changedFiles));
-            if (updatedChecksums > 0) {
-                details.push(`✅ Zaktualizowano checksumy w product.json (${updatedChecksums} plików)`);
-            }
-        } catch (err) {
-            details.push(`⚠️ Nie udało się zaktualizować checksumów: ${err}`);
+    // Aktualizuj checksumy wszystkich plików patchowanych teraz i historycznie (na podstawie backupów).
+    try {
+        const checksumResult = updateProductChecksums(paths, Array.from(changedFiles));
+        if (checksumResult.updated > 0 || checksumResult.normalized > 0) {
+            details.push(
+                `✅ Zsynchronizowano checksumy w product.json (zaktualizowane: ${checksumResult.updated}, znormalizowane: ${checksumResult.normalized})`
+            );
+        } else if (checksumResult.scannedCandidates > 0) {
+            details.push('ℹ️ Checksumy product.json są już zgodne z plikami.');
         }
+        if (checksumResult.missingKeys > 0) {
+            details.push(`⚠️ ${checksumResult.missingKeys} plików nie miało wpisu checksum w product.json.`);
+        }
+    } catch (err) {
+        details.push(`⚠️ Nie udało się zaktualizować checksumów: ${err}`);
+    }
+
+    const legacyCleanup = cleanupLegacyBackups(paths);
+    if (legacyCleanup.removed > 0 || legacyCleanup.migrated > 0) {
+        details.push(
+            `✅ Posprzątano legacy backupy w instalacji (usunięto: ${legacyCleanup.removed}, zmigrowano: ${legacyCleanup.migrated}).`
+        );
+    }
+    if (legacyCleanup.failed > 0) {
+        details.push(`⚠️ Nie udało się posprzątać ${legacyCleanup.failed} legacy backupów.`);
     }
 
     const totalReplaced = replaced + coreResult.coreReplacedCount + coreResult.extensionReplacedCount;
@@ -294,47 +400,80 @@ export function applyPolishPatch(): PatchResult {
 }
 
 /**
- * Aktualizuje checksumy patchowanych plików, jeśli występują w product.json.
+ * Aktualizuje checksumy patchowanych plików i normalizuje wpisy product.json.
  */
-function updateProductChecksums(paths: AntigravityPaths, changedFiles: string[]): number {
+function updateProductChecksums(paths: AntigravityPaths, changedFiles: string[]): ChecksumUpdateResult {
+    const emptyResult: ChecksumUpdateResult = {
+        updated: 0,
+        normalized: 0,
+        scannedCandidates: 0,
+        missingKeys: 0
+    };
     if (!fs.existsSync(paths.productJson)) {
-        return 0;
+        return emptyResult;
     }
 
-    // Backup product.json (tylko raz)
-    const productBackup = paths.productJson + '.backup-pl';
-    if (!fs.existsSync(productBackup)) {
-        fs.copyFileSync(paths.productJson, productBackup);
-    }
+    // Backup product.json poza katalogiem instalacji.
+    ensureBackupFile(paths, paths.productJson, paths.productJsonBackup);
 
     const productRaw = fs.readFileSync(paths.productJson, 'utf-8');
     const product = JSON.parse(productRaw);
 
-    if (!product.checksums || typeof product.checksums !== 'object') {
-        return 0;
+    if (!product.checksums || typeof product.checksums !== 'object' || Array.isArray(product.checksums)) {
+        return emptyResult;
     }
 
+    const checksums = product.checksums as Record<string, string>;
     let updated = 0;
-    for (const changedFile of changedFiles) {
-        if (!fs.existsSync(changedFile)) {
+    let normalized = 0;
+    let missingKeys = 0;
+
+    // Normalizacja starych wpisów zapisanych z paddingiem "=" przez starsze wersje rozszerzenia.
+    for (const [key, rawValue] of Object.entries(checksums)) {
+        if (typeof rawValue !== 'string') {
             continue;
         }
-
-        const key = resolveChecksumKey(paths, changedFile);
-        if (!key || !Object.prototype.hasOwnProperty.call(product.checksums, key)) {
-            continue;
+        const normalizedValue = rawValue.replace(/=+$/g, '');
+        if (normalizedValue !== rawValue) {
+            checksums[key] = normalizedValue;
+            normalized++;
         }
-
-        const hash = crypto.createHash('sha256').update(fs.readFileSync(changedFile)).digest('base64');
-        product.checksums[key] = hash;
-        updated++;
     }
 
-    if (updated > 0) {
+    const candidates = collectChecksumCandidates(paths, changedFiles);
+    for (const candidateFile of candidates) {
+        if (!fs.existsSync(candidateFile)) {
+            continue;
+        }
+
+        const key = resolveChecksumKey(paths, candidateFile);
+        if (!key || !Object.prototype.hasOwnProperty.call(checksums, key)) {
+            missingKeys++;
+            continue;
+        }
+
+        // Antigravity trzyma checksumy base64 bez końcowego paddingu "=".
+        const hash = crypto
+            .createHash('sha256')
+            .update(fs.readFileSync(candidateFile))
+            .digest('base64')
+            .replace(/=+$/g, '');
+        if (checksums[key] !== hash) {
+            checksums[key] = hash;
+            updated++;
+        }
+    }
+
+    if (updated > 0 || normalized > 0) {
         fs.writeFileSync(paths.productJson, JSON.stringify(product, null, '\t'), 'utf-8');
     }
 
-    return updated;
+    return {
+        updated,
+        normalized,
+        scannedCandidates: candidates.length,
+        missingKeys
+    };
 }
 
 /**
@@ -360,8 +499,9 @@ export function restoreOriginal(): PatchResult {
         let restoredFiles = 0;
         const details: string[] = [];
 
-        if (fs.existsSync(paths.backup)) {
-            fs.copyFileSync(paths.backup, paths.jetskiMain);
+        const jetskiBackup = findExistingBackup(paths, paths.jetskiMain, paths.backup);
+        if (jetskiBackup) {
+            fs.copyFileSync(jetskiBackup, paths.jetskiMain);
             restoredFiles++;
             details.push('Przywrócono jetskiAgent/main.js');
         }
@@ -371,8 +511,8 @@ export function restoreOriginal(): PatchResult {
         details.push(...coreRestore.details);
 
         // Przywróć oryginalny product.json
-        const productBackup = paths.productJson + '.backup-pl';
-        if (fs.existsSync(productBackup)) {
+        const productBackup = findExistingBackup(paths, paths.productJson, paths.productJsonBackup);
+        if (productBackup) {
             fs.copyFileSync(productBackup, paths.productJson);
             restoredFiles++;
             details.push('Przywrócono product.json');
@@ -469,6 +609,203 @@ export function checkPatchStatus(): { patched: boolean; canPatch: boolean; detai
         canPatch: true,
         details: `Stan mieszany. ${details}`
     };
+}
+
+function evaluateRuntimePatchGuard(paths: AntigravityPaths): RuntimePatchGuardResult {
+    const runningExecutables = listRunningAntigravityExecutables();
+    if (runningExecutables.length === 0) {
+        return { canProceed: true };
+    }
+
+    const installRoot = normalizePathForCompare(path.resolve(paths.appRoot, '..', '..'));
+    const currentExec = normalizePathForCompare(process.execPath);
+    const targetRunning = runningExecutables.some(executable =>
+        normalizePathForCompare(executable).startsWith(installRoot)
+    );
+
+    if (!targetRunning) {
+        return { canProceed: true };
+    }
+
+    if (currentExec.startsWith(installRoot)) {
+        return {
+            canProceed: true,
+            advisory:
+                'ℹ️ Patch uruchomiono z działającego Antigravity. Komunikat „instalacja zmodyfikowana na dysku” może pojawić się do restartu i nie oznacza awarii tłumaczenia.'
+        };
+    }
+
+    return {
+        canProceed: false,
+        reason: 'Wykryto uruchomiony proces Antigravity. Zamknij wszystkie okna Antigravity i spróbuj ponownie.'
+    };
+}
+
+function listRunningAntigravityExecutables(): string[] {
+    try {
+        if (process.platform === 'win32') {
+            const output = execFileSync(
+                'powershell',
+                [
+                    '-NoProfile',
+                    '-Command',
+                    "Get-Process -Name 'Antigravity' -ErrorAction SilentlyContinue | ForEach-Object { $_.Path } | Where-Object { $_ }"
+                ],
+                { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'ignore'] }
+            );
+            return output
+                .split(/\r?\n/)
+                .map(line => line.trim())
+                .filter(Boolean);
+        }
+
+        if (process.platform === 'darwin' || process.platform === 'linux') {
+            const output = execFileSync('pgrep', ['-af', 'Antigravity'], {
+                encoding: 'utf-8',
+                stdio: ['ignore', 'pipe', 'ignore']
+            });
+            return output
+                .split(/\r?\n/)
+                .map(line => line.trim())
+                .filter(Boolean)
+                .map(line => {
+                    const firstSpace = line.indexOf(' ');
+                    return firstSpace >= 0 ? line.slice(firstSpace + 1).trim() : '';
+                })
+                .filter(Boolean);
+        }
+    } catch {
+        return [];
+    }
+
+    return [];
+}
+
+function collectChecksumCandidates(paths: AntigravityPaths, changedFiles: string[]): string[] {
+    const candidates = new Set<string>();
+    for (const changedFile of changedFiles) {
+        candidates.add(changedFile);
+    }
+
+    // Zawsze sprawdzaj główne cele patchowania.
+    candidates.add(paths.jetskiMain);
+    candidates.add(paths.nlsMessages);
+
+    // Jeśli istnieją backupy, to pliki były patchowane wcześniej — też wymagają synchronizacji checksum.
+    if (fs.existsSync(paths.backup)) {
+        candidates.add(paths.jetskiMain);
+    }
+    if (fs.existsSync(paths.nlsMessagesBackup)) {
+        candidates.add(paths.nlsMessages);
+    }
+
+    const extensionTargets = findFilesBySuffix(paths.extensionsRoot, 'package.nls.json');
+    for (const target of extensionTargets) {
+        if (hasAnyBackup(paths, target, target + '.backup-pl')) {
+            candidates.add(target);
+        }
+    }
+
+    return Array.from(candidates).filter(file => fs.existsSync(file));
+}
+
+function ensureBackupFile(paths: AntigravityPaths, targetPath: string, preferredBackup: string): void {
+    const candidates = getBackupCandidates(paths, targetPath, preferredBackup);
+    const primaryBackup = candidates[0];
+    if (fs.existsSync(primaryBackup)) {
+        return;
+    }
+
+    const source = candidates.slice(1).find(candidate => fs.existsSync(candidate)) ?? targetPath;
+    if (!fs.existsSync(source)) {
+        return;
+    }
+
+    ensureParentDirectory(primaryBackup);
+    fs.copyFileSync(source, primaryBackup);
+}
+
+function findExistingBackup(paths: AntigravityPaths, targetPath: string, preferredBackup: string): string | null {
+    const candidates = getBackupCandidates(paths, targetPath, preferredBackup);
+    for (const candidate of candidates) {
+        if (fs.existsSync(candidate)) {
+            return candidate;
+        }
+    }
+    return null;
+}
+
+function hasAnyBackup(paths: AntigravityPaths, targetPath: string, preferredBackup: string): boolean {
+    return findExistingBackup(paths, targetPath, preferredBackup) !== null;
+}
+
+function getBackupCandidates(paths: AntigravityPaths, targetPath: string, preferredBackup: string): string[] {
+    const candidates: string[] = [];
+    candidates.push(preferredBackup);
+
+    const viaResolver = paths.getBackupPathFor?.(targetPath);
+    if (viaResolver && !candidates.includes(viaResolver)) {
+        candidates.push(viaResolver);
+    }
+
+    const legacyByResolver = paths.getLegacyBackupPathFor?.(targetPath);
+    if (legacyByResolver && !candidates.includes(legacyByResolver)) {
+        candidates.push(legacyByResolver);
+    }
+
+    const legacyByConvention = targetPath + '.backup-pl';
+    if (!candidates.includes(legacyByConvention)) {
+        candidates.push(legacyByConvention);
+    }
+
+    return candidates;
+}
+
+function cleanupLegacyBackups(paths: AntigravityPaths): { removed: number; migrated: number; failed: number } {
+    const legacyFiles = new Set<string>();
+    const legacySeeds = [paths.jetskiMain, paths.nlsMessages, paths.productJson];
+
+    for (const target of legacySeeds) {
+        const legacy = paths.getLegacyBackupPathFor?.(target) ?? (target + '.backup-pl');
+        if (legacy) {
+            legacyFiles.add(legacy);
+        }
+    }
+
+    for (const extensionLegacy of findFilesBySuffix(paths.extensionsRoot, 'package.nls.json.backup-pl')) {
+        legacyFiles.add(extensionLegacy);
+    }
+
+    let removed = 0;
+    let migrated = 0;
+    let failed = 0;
+
+    for (const legacyFile of legacyFiles) {
+        if (!fs.existsSync(legacyFile)) {
+            continue;
+        }
+
+        const targetPath = legacyFile.endsWith('.backup-pl')
+            ? legacyFile.slice(0, -'.backup-pl'.length)
+            : legacyFile;
+        const preferredBackup = paths.getBackupPathFor?.(targetPath);
+
+        try {
+            if (preferredBackup) {
+                if (!fs.existsSync(preferredBackup)) {
+                    ensureParentDirectory(preferredBackup);
+                    fs.copyFileSync(legacyFile, preferredBackup);
+                    migrated++;
+                }
+            }
+            fs.unlinkSync(legacyFile);
+            removed++;
+        } catch {
+            failed++;
+        }
+    }
+
+    return { removed, migrated, failed };
 }
 
 function prepareTranslations(entries: TranslationEntry[]): PreparedTranslation[] {
@@ -591,6 +928,52 @@ function resolveChecksumKey(paths: AntigravityPaths, absolutePath: string): stri
 
 function toPosixPath(value: string): string {
     return value.split(path.sep).join('/');
+}
+
+function ensureParentDirectory(filePath: string): void {
+    const directory = path.dirname(filePath);
+    if (!fs.existsSync(directory)) {
+        fs.mkdirSync(directory, { recursive: true });
+    }
+}
+
+function normalizePathForCompare(value: string): string {
+    return path.normalize(value).replace(/\\/g, '/').toLowerCase();
+}
+
+function findFilesBySuffix(root: string, suffix: string): string[] {
+    const files: string[] = [];
+    if (!fs.existsSync(root)) {
+        return files;
+    }
+
+    const stack = [root];
+    while (stack.length > 0) {
+        const current = stack.pop();
+        if (!current) {
+            continue;
+        }
+
+        let entries: fs.Dirent[];
+        try {
+            entries = fs.readdirSync(current, { withFileTypes: true });
+        } catch {
+            continue;
+        }
+
+        for (const entry of entries) {
+            const fullPath = path.join(current, entry.name);
+            if (entry.isDirectory()) {
+                stack.push(fullPath);
+                continue;
+            }
+            if (entry.isFile() && fullPath.endsWith(suffix)) {
+                files.push(fullPath);
+            }
+        }
+    }
+
+    return files;
 }
 
 function truncate(value: string, max = 80): string {

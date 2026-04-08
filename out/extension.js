@@ -52,7 +52,7 @@ function activate(context) {
     // Komenda: Spolszcz interfejs Antigravity (główna funkcja!)
     const patchCommand = vscode.commands.registerCommand('antigravityPL.applyPatch', async () => {
         const confirm = await vscode.window.showWarningMessage('Czy chcesz spolszczyć interfejs Antigravity? Zmienione zostaną panele Settings i Agent Manager.\n\n' +
-            '⚠️ Antigravity musi być ZAMKNIĘTY podczas patchowania. Po zastosowaniu zmian uruchom go ponownie.', { modal: true }, 'Tak, spolszcz', 'Anuluj');
+            '⚠️ Najbezpieczniej patchować przy zamkniętym Antigravity. Jeśli uruchamiasz patch z poziomu Antigravity, może pojawić się chwilowy komunikat o modyfikacji instalacji do czasu restartu.', { modal: true }, 'Tak, spolszcz', 'Anuluj');
         if (confirm !== 'Tak, spolszcz') {
             return;
         }
@@ -68,7 +68,7 @@ function activate(context) {
     // Komenda: Przywróć oryginalny angielski interfejs
     const restoreCommand = vscode.commands.registerCommand('antigravityPL.restoreOriginal', async () => {
         const confirm = await vscode.window.showWarningMessage('Przywrócić oryginalny angielski interfejs Antigravity?\n\n' +
-            '⚠️ Antigravity musi być zamknięty. Po przywróceniu uruchom go ponownie.', { modal: true }, 'Tak, przywróć angielski', 'Anuluj');
+            '⚠️ Najbezpieczniej przywracać przy zamkniętym Antigravity. Po przywróceniu uruchom go ponownie.', { modal: true }, 'Tak, przywróć angielski', 'Anuluj');
         if (confirm !== 'Tak, przywróć angielski') {
             return;
         }

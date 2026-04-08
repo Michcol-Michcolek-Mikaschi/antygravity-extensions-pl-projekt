@@ -7,6 +7,8 @@ export interface CoreLocalizationPaths {
     nlsMessages: string;
     nlsMessagesBackup: string;
     nlsKeys: string;
+    getBackupPathFor?: (targetPath: string) => string;
+    getLegacyBackupPathFor?: (targetPath: string) => string | null;
 }
 
 interface LanguagePackInfo {
@@ -114,20 +116,28 @@ export function restoreCoreLocalizationBackups(paths: CoreLocalizationPaths): { 
     let restoredFiles = 0;
     const details: string[] = [];
 
-    if (fs.existsSync(paths.nlsMessagesBackup)) {
-        fs.copyFileSync(paths.nlsMessagesBackup, paths.nlsMessages);
+    const nlsBackup = getBackupCandidates(paths, paths.nlsMessages, paths.nlsMessagesBackup)
+        .find(candidate => fs.existsSync(candidate));
+    if (nlsBackup) {
+        fs.copyFileSync(nlsBackup, paths.nlsMessages);
         restoredFiles++;
         details.push('Przywrócono out/nls.messages.json');
     }
 
-    const extensionBackups = findFilesBySuffix(paths.extensionsRoot, 'package.nls.json.backup-pl');
-    for (const backupFile of extensionBackups) {
-        const target = backupFile.slice(0, -'.backup-pl'.length);
-        fs.copyFileSync(backupFile, target);
+    let restoredExtensions = 0;
+    const extensionTargets = findFilesBySuffix(paths.extensionsRoot, 'package.nls.json');
+    for (const target of extensionTargets) {
+        const backup = getBackupCandidates(paths, target, target + '.backup-pl')
+            .find(candidate => fs.existsSync(candidate));
+        if (!backup) {
+            continue;
+        }
+        fs.copyFileSync(backup, target);
         restoredFiles++;
+        restoredExtensions++;
     }
-    if (extensionBackups.length > 0) {
-        details.push(`Przywrócono tłumaczenia rozszerzeń wbudowanych: ${extensionBackups.length} plików`);
+    if (restoredExtensions > 0) {
+        details.push(`Przywrócono tłumaczenia rozszerzeń wbudowanych: ${restoredExtensions} plików`);
     }
 
     return { restoredFiles, details };
@@ -283,7 +293,7 @@ function patchCoreMessages(paths: CoreLocalizationPaths, mainTranslationPath: st
         return { replaced: 0, changed: false };
     }
 
-    const sourcePath = ensureBackupAndGetSource(paths.nlsMessages, paths.nlsMessagesBackup);
+    const sourcePath = ensureBackupAndGetSource(paths, paths.nlsMessages, paths.nlsMessagesBackup);
     const nlsMessages = JSON.parse(fs.readFileSync(sourcePath, 'utf-8'));
     const nlsKeys = JSON.parse(fs.readFileSync(paths.nlsKeys, 'utf-8'));
     const mainI18n = JSON.parse(fs.readFileSync(mainTranslationPath, 'utf-8'));
@@ -359,7 +369,7 @@ function patchBuiltInExtensions(paths: CoreLocalizationPaths, extensionTranslati
         }
 
         const backup = packageNlsPath + '.backup-pl';
-        const source = ensureBackupAndGetSource(packageNlsPath, backup);
+        const source = ensureBackupAndGetSource(paths, packageNlsPath, backup);
 
         let sourceJson: any;
         try {
@@ -461,11 +471,46 @@ function pickTranslation(bundle: Record<string, unknown>, key: string, english: 
     return english;
 }
 
-function ensureBackupAndGetSource(target: string, backup: string): string {
-    if (!fs.existsSync(backup)) {
-        fs.copyFileSync(target, backup);
+function ensureBackupAndGetSource(paths: CoreLocalizationPaths, target: string, backup: string): string {
+    const candidates = getBackupCandidates(paths, target, backup);
+    const preferredBackup = candidates[0];
+    const fallbackSource = candidates.slice(1).find(candidate => fs.existsSync(candidate)) ?? target;
+
+    if (!fs.existsSync(preferredBackup) && fs.existsSync(fallbackSource)) {
+        ensureParentDir(preferredBackup);
+        fs.copyFileSync(fallbackSource, preferredBackup);
     }
-    return fs.existsSync(backup) ? backup : target;
+
+    if (fs.existsSync(preferredBackup)) {
+        return preferredBackup;
+    }
+
+    const existingFallback = candidates.slice(1).find(candidate => fs.existsSync(candidate));
+    return existingFallback ?? target;
+}
+
+function getBackupCandidates(paths: CoreLocalizationPaths, target: string, defaultBackup: string): string[] {
+    const candidates: string[] = [];
+    const preferred = paths.getBackupPathFor?.(target) ?? defaultBackup;
+    candidates.push(preferred);
+
+    const legacy = paths.getLegacyBackupPathFor?.(target);
+    if (legacy && !candidates.includes(legacy)) {
+        candidates.push(legacy);
+    }
+
+    if (!candidates.includes(defaultBackup)) {
+        candidates.push(defaultBackup);
+    }
+
+    return candidates;
+}
+
+function ensureParentDir(filePath: string): void {
+    const directory = path.dirname(filePath);
+    if (!fs.existsSync(directory)) {
+        fs.mkdirSync(directory, { recursive: true });
+    }
 }
 
 function findFilesBySuffix(root: string, suffix: string): string[] {

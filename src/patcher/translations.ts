@@ -903,6 +903,79 @@ export const labelTranslations: TranslationEntry[] = [
 // NOWE TŁUMACZENIA Z PODANEJ LISTY
 // =====================================================================
 export const additionalUpdateTranslations: TranslationEntry[] = [
+    // --- Korekty dynamicznych stringów w ustawieniach (template literals ${...}) ---
+    { en: 'label:"Marketplace Item URL"', pl: 'label:"Adres URL elementu marketplace"' },
+    { en: 'label:"Marketplace Gallery URL"', pl: 'label:"Adres URL galerii marketplace"' },
+    {
+        en: 'Changes the base URL on each extension page\\. You must restart (\\$\\{[^}]+\\}) to use the new marketplace after changing this value\\.',
+        pl: 'Zmienia bazowy adres URL na każdej stronie rozszerzeń. Po zmianie tej wartości musisz ponownie uruchomić $1, aby używać nowego marketplace.',
+        mode: 'regex',
+    },
+    {
+        en: 'Changes the base URL for marketplace search results\\. You must restart (\\$\\{[^}]+\\}) to use the new marketplace after changing this value\\.',
+        pl: 'Zmienia bazowy adres URL wyników wyszukiwania marketplace. Po zmianie tej wartości musisz ponownie uruchomić $1, aby używać nowego marketplace.',
+        mode: 'regex',
+    },
+    {
+        en: 'In addition to the custom skills folder, (\\$\\{[^}]+\\}) will search the following paths in order to find skills for the agent\\.',
+        pl: 'Oprócz folderu niestandardowych umiejętności $1 będzie przeszukiwać poniższe ścieżki, aby znaleźć umiejętności dla agenta.',
+        mode: 'regex',
+    },
+    {
+        en: 'For google3 workspaces, paths are relative to //depot and begins with google3/',
+        pl: 'Dla obszarów roboczych google3 ścieżki są względne względem //depot i zaczynają się od google3/',
+    },
+    {
+        en: 'label:"Always Allow",description:"Actions the agent may always perform without asking."',
+        pl: 'label:"Zawsze zezwalaj",description:"Działania, które agent może zawsze wykonywać bez pytania."',
+    },
+    {
+        en: 'label:"Always Deny",description:"Actions the agent may never perform."',
+        pl: 'label:"Zawsze blokuj",description:"Działania, których agent nigdy nie może wykonać."',
+    },
+    {
+        en: 'label:"Always Ask",description:"Actions the agent must always ask before performing."',
+        pl: 'label:"Zawsze pytaj",description:"Działania, o które agent zawsze musi zapytać przed wykonaniem."',
+    },
+    { en: 'label:"Always Allow",onClick:()=>e()', pl: 'label:"Zawsze zezwalaj",onClick:()=>e()' },
+    { en: 'label:"Allow Once",onClick:()=>r()', pl: 'label:"Zezwól raz",onClick:()=>r()' },
+    { en: 'label:"Deny",onClick:()=>t()', pl: 'label:"Odrzuć",onClick:()=>t()' },
+    { en: 'label:"Allow List Terminal Commands"', pl: 'label:"Lista dozwolonych poleceń terminala"' },
+    {
+        en: 'description:"Agent auto-executes commands matched by an allow list entry."',
+        pl: 'description:"Agent automatycznie wykonuje polecenia dopasowane do wpisu z listy dozwolonych."',
+    },
+    { en: 'label:"Deny List Terminal Commands"', pl: 'label:"Lista blokowanych poleceń terminala"' },
+    {
+        en: 'description:"Agent asks for permission before executing commands matched by a deny list entry."',
+        pl: 'description:"Agent prosi o uprawnienie przed wykonaniem poleceń dopasowanych do wpisu z listy blokowanych."',
+    },
+    // --- MCP / Personalizacja: brakujące etykiety i opisy ---
+    { en: 'children:[S?"Refreshing...":"Refresh",', pl: 'children:[S?"Odświeżanie...":"Odśwież",' },
+    { en: 'children:"Refresh"', pl: 'children:"Odśwież"' },
+    { en: 'children:"Refreshing..."', pl: 'children:"Odświeżanie..."' },
+    { en: 'children:[v(St,{name:"add",className:"w-3 h-3"}),"Add"]', pl: 'children:[v(St,{name:"add",className:"w-3 h-3"}),"Dodaj"]' },
+    { en: 'children:u?v(qt,{children:[v(St,{name:"progress_activity",className:"w-3 h-3 animate-spin"}),"Installing..."]}):"Install"', pl: 'children:u?v(qt,{children:[v(St,{name:"progress_activity",className:"w-3 h-3 animate-spin"}),"Instalowanie..."]}):"Zainstaluj"' },
+    { en: 'children:r===a.id?v("button",{className:"flex items-center gap-1 px-2 py-1 text-xs bg-blue-500/50 text-white rounded cursor-not-allowed",disabled:!0,children:[v(St,{name:"progress_activity",className:"w-3 h-3 animate-spin"}),"Installing"]})', pl: 'children:r===a.id?v("button",{className:"flex items-center gap-1 px-2 py-1 text-xs bg-blue-500/50 text-white rounded cursor-not-allowed",disabled:!0,children:[v(St,{name:"progress_activity",className:"w-3 h-3 animate-spin"}),"Instalowanie"]})' },
+    { en: 'children:[v(St,{name:"open_in_new",className:"w-3 h-3"}),"Authenticate"]', pl: 'children:[v(St,{name:"open_in_new",className:"w-3 h-3"}),"Uwierzytelnij"]' },
+    { en: 'window.confirm("Sign out of this server?")', pl: 'window.confirm("Wylogować się z tego serwera?")' },
+    {
+        en: 'children:["You currently don\\\'t have any MCP Servers installed.",p.openConfigFile?" Add an MCP server below or add a custom one via the MCP Config.":" Add an MCP server below."]',
+        pl: 'children:["Obecnie nie masz zainstalowanych serwerów MCP.",p.openConfigFile?" Dodaj serwer MCP poniżej albo dodaj własny przez konfigurację MCP.":" Dodaj serwer MCP poniżej."]',
+    },
+    { en: 'No MCP servers found for "', pl: 'Nie znaleziono serwerów MCP dla "' },
+    { en: `children:['No MCP servers found for "',T,'"']`, pl: `children:['Nie znaleziono serwerów MCP dla "',T,'"']` },
+    { en: 'children:"Search for MCP servers to add to your configuration"', pl: 'children:"Wyszukaj serwery MCP do dodania do konfiguracji"' },
+    { en: 'title:"MCP Configuration Error:"', pl: 'title:"Błąd konfiguracji MCP:"' },
+    { en: 'placeholder:"Search by name"', pl: 'placeholder:"Szukaj po nazwie"' },
+    { en: 'children:"Open MCP Config"', pl: 'children:"Otwórz konfigurację MCP"' },
+    { en: 'children:"No MCP Servers"', pl: 'children:"Brak serwerów MCP"' },
+    // --- Konto ---
+    { en: 'children:["Your Plan: ",a]', pl: 'children:["Twój plan: ",a]' },
+    { en: 'children:["By using this app, you agree to its"," ",v("a",{href:"https://antigravity.google/terms",className:"text-blue-500 hover:underline",target:"_blank",rel:"noreferrer",children:"Terms of Service"})]', pl: 'children:["Korzystając z tej aplikacji, zgadzasz się na"," ",v("a",{href:"https://antigravity.google/terms",className:"text-blue-500 hover:underline",target:"_blank",rel:"noreferrer",children:"Warunki korzystania z usługi"})]' },
+    // --- Krótkie etykiety EN wciąż widoczne w UI/diagnostyce ---
+    { en: '"Always Allow"', pl: '"Zawsze zezwalaj"' },
+    { en: '"Terms of Service"', pl: '"Warunki korzystania z usługi"' },
     { en: 'When toggled on, Antigravity collects usage data to help Google enhance performance and features.', pl: 'Po włączeniu Antigravity zbiera dane użycia, aby pomóc Google poprawiać wydajność i funkcje.' },
     { en: 'Marketing Emails', pl: 'E-maile marketingowe' },
     { en: 'Receive product updates, tips, and promotions from Google Antigravity via email.', pl: 'Otrzymuj przez e-mail aktualizacje produktu, wskazówki i promocje od Google Antigravity.' },
