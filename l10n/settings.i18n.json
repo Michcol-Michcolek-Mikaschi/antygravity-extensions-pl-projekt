@@ -7,7 +7,7 @@
       "configuration.autoOpenGuide.description": "Automatycznie otwórz przewodnik przy pierwszym uruchomieniu"
     },
     "settings/agent": {
-      "conversation.mode": "Tryb konwersacji",
+      "conversation.mode": "Tryb rozmowy",
       "conversation.mode.desc": "Jak agent ma podchodzić do zadań — planując krok po kroku (Planowanie) lub działając od razu (Szybki)",
       "conversation.mode.planning": "Planowanie",
       "conversation.mode.planning.desc": "Agent analizuje zadanie, tworzy plan i realizuje go krokami. Bezpieczniejszy dla złożonych zadań.",
@@ -29,7 +29,7 @@
       "reasoning.model.desc": "Wybór modelu AI do rozumowania i analizy",
       "strict.mode": "Tryb ścisły",
       "strict.mode.desc": "Wymusza restrykcyjne reguły — agent musi potwierdzić każdą operację",
-      "sandboxing": "Piaskownica (Sandboxing)",
+      "sandboxing": "Piaskownica",
       "sandboxing.desc": "Uruchamia kod agenta w izolowanym środowisku — zwiększa bezpieczeństwo",
       "rules": "Reguły agenta",
       "rules.desc": "Instrukcje sterujące zachowaniem agenta — globalne (GEMINI.md) lub lokalne (.agents/rules/)"
@@ -37,22 +37,22 @@
     "settings/editor": {
       "tab.completions": "Uzupełnianie tabulatorem",
       "tab.completions.desc": "Podpowiedzi kodu wyświetlane podczas pisania — akceptuj klawiszem Tab",
-      "command": "Komenda (Ctrl+I / Cmd+I)",
+      "command": "Polecenie (Ctrl+I / Cmd+I)",
       "command.desc": "Szybki inline czat z agentem w edytorze — do małych zmian i pytań",
       "agent.side.panel": "Panel boczny agenta",
       "agent.side.panel.desc": "Włącz/wyłącz boczny panel z podsumowaniem agenta obok edytora",
       "review.changes": "Przegląd zmian agenta",
-      "review.changes.desc": "Jak wyświetlać zmiany dokonane przez agenta — inline diff lub Changes Sidebar"
+      "review.changes.desc": "Jak wyświetlać zmiany dokonane przez agenta — różnice w linii lub panel zmian"
     },
     "settings/browser": {
       "browser.enabled": "Przeglądarka",
       "browser.enabled.desc": "Włącz wbudowaną przeglądarkę Antigravity do testowania stron web",
-      "browser.subagent": "Sub-agent przeglądarki",
+      "browser.subagent": "Podagent przeglądarki",
       "browser.subagent.desc": "Agent może samodzielnie przeglądać strony do zbierania kontekstu",
-      "browser.allowlist": "Lista dozwolonych stron (Allowlist)",
+      "browser.allowlist": "Lista dozwolonych stron",
       "browser.allowlist.desc": "Domeny, które sub-agent przeglądarki może odwiedzać",
       "browser.chrome.profile": "Profil Chrome",
-      "browser.chrome.profile.desc": "Ścieżka do profilu przeglądarki Chrome używanego przez sub-agenta"
+      "browser.chrome.profile.desc": "Ścieżka do profilu przeglądarki Chrome używanego przez podagenta"
     },
     "settings/account": {
       "telemetry": "Telemetria",

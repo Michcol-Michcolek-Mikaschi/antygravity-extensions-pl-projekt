@@ -3,6 +3,10 @@ export interface PatchResult {
     message: string;
     replacedCount: number;
     skippedCount: number;
+    unmatchedCount: number;
+    ambiguousCount: number;
+    exactAppliedCount: number;
+    regexAppliedCount: number;
     details: string[];
 }
 /**

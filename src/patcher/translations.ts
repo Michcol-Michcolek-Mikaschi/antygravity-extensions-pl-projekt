@@ -9,6 +9,9 @@
 export interface TranslationEntry {
     en: string;
     pl: string;
+    mode?: 'exact' | 'regex';
+    flags?: string;
+    priority?: number;
 }
 
 // =====================================================================
@@ -57,7 +60,7 @@ export const sectionTitleTranslations: TranslationEntry[] = [
     { en: 'title:"Model Quota"', pl: 'title:"Limity modeli"' },
     { en: 'title:"Account"', pl: 'title:"Konto"' },
     { en: 'title:"Browser"', pl: 'title:"Przeglądarka"' },
-    { en: 'title:"Terminal"', pl: 'title:"Terminal"' },
+    { en: 'title:"Terminal"', pl: 'title:"Wiersz poleceń"' },
     { en: 'title:"Allowlist"', pl: 'title:"Lista dozwolonych"' },
     { en: 'title:"Commands"', pl: 'title:"Polecenia"' },
     { en: 'title:"Knowledge"', pl: 'title:"Baza wiedzy"' },
@@ -99,11 +102,6 @@ export const sectionTitleTranslations: TranslationEntry[] = [
 //  E. USTAWIENIA — PEŁNE label+description (Settings panele)
 // =====================================================================
 export const settingsTranslations: TranslationEntry[] = [
-    // --- Telemetry opis pełny ---
-    {
-        en: 'When toggled on, Antigravity collects usage data to help Google enhance performance and features.',
-        pl: 'Po włączeniu Antigravity zbiera dane o użyciu, aby Google mógł ulepszać wydajność i funkcje.',
-    },
     // --- AGENT: Strict Mode ---
     {
         en: 'label:"Strict Mode",description:"When enabled, enforces settings that prevent the agent from autonomously running targeted exploits and requires human review for all agent actions. Visit antigravity.google/docs/strict-mode for details."',
@@ -174,7 +172,7 @@ export const settingsTranslations: TranslationEntry[] = [
     // --- Non-Workspace Files ---
     {
         en: 'label:"Agent Non-Workspace File Access",description:"Allow Agent to view and edit files outside of the current workspace automatically. Use with caution: this provides the Agent access to additional potentially-relevant information, but also allows the Agent to access credential files, secrets, and other files outside of the workspace that could be targeted in prompt injection attacks or other exploits by malicious actors."',
-        pl: 'label:"Dostęp agenta do plików poza projektem",description:"Zezwól agentowi na automatyczne przeglądanie i edycję plików poza bieżącym obszarem roboczym. Używaj ostrożnie: daje to agentowi dostęp do dodatkowych informacji, ale także umożliwia dostęp do plików z danymi uwierzytelniającymi, kluczami i innymi plikami poza projektem, które mogą być celem ataków prompt injection."',
+        pl: 'label:"Dostęp agenta do plików poza projektem",description:"Zezwól agentowi na automatyczne przeglądanie i edycję plików poza bieżącym obszarem roboczym. Używaj ostrożnie: daje to agentowi dostęp do dodatkowych informacji, ale także umożliwia dostęp do plików z danymi uwierzytelniającymi, kluczami i innymi plikami poza projektem, które mogą być celem ataków wstrzykiwania poleceń."',
     },
     // --- Auto-Open Edited Files ---
     {
@@ -298,15 +296,6 @@ export const settingsTranslations: TranslationEntry[] = [
         en: 'label:"Browser URL Allowlist",description:"Control which URLs the browser can access. Add domains or full URLs to the allowlist."',
         pl: 'label:"Dozwolone adresy URL przeglądarki",description:"Kontroluj, do których adresów URL przeglądarka ma dostęp. Dodaj domeny lub pełne adresy URL do listy dozwolonych."',
     },
-    // --- Marketplace URLs ---
-    {
-        en: 'label:"Marketplace Item URL",description:"Changes the base URL on each extension page. You must restart Antigravity to use the new marketplace after changing this value."',
-        pl: 'label:"Marketplace Item URL",description:"Zmienia bazowy URL na każdej stronie rozszerzenia. Po zmianie wartości uruchom ponownie Antigravity, aby użyć nowego marketplace."',
-    },
-    {
-        en: 'label:"Marketplace Gallery URL",description:"Changes the base URL for marketplace search results. You must restart Antigravity to use the new marketplace after changing this value."',
-        pl: 'label:"Marketplace Gallery URL",description:"Zmienia bazowy URL dla wyników wyszukiwania w marketplace. Po zmianie wartości uruchom ponownie Antigravity, aby użyć nowego marketplace."',
-    },
     // --- Shell Integration ---
     {
         en: "label:\"Enable Shell Integration\",description:\"When enabled, Agent will use IDE's shell integration to detect and report terminal command execution. When disabled, the agent will use it's own shell. Restart the application for this to take effect.\"",
@@ -315,19 +304,17 @@ export const settingsTranslations: TranslationEntry[] = [
     // --- Marketing Emails ---
     { en: 'label:"Marketing Emails"', pl: 'label:"E-maile marketingowe"' },
     {
-        en: 'Receive product updates, tips, and promotions from Google Antigravity via email.',
-        pl: 'Otrzymuj e-mailem aktualizacje produktu, wskazówki i promocje od Google Antigravity.',
+        en: 'Receive product updates, tips, and promotions from Google',
+        pl: 'Otrzymuj informacje o aktualizacjach, wskazówki i promocje od Google',
     },
     // --- Telemetry opis ---
     {
         en: 'collects usage data to help Google enhance performance and features.',
         pl: 'zbiera dane użytkowania, aby pomóc Google ulepszać wydajność i funkcje.',
     },
-    { en: 'When toggled on, ', pl: 'Po włączeniu ' },
+    { en: 'When toggled on, ', pl: 'Po włączeniu' },
     // --- Your Plan ---
     { en: '"Your Plan: "', pl: '"Twój plan: "' },
-    { en: '"Your Plan: Google AI Pro"', pl: '"Twój plan: Google AI Pro"' },
-    { en: 'You can upgrade to the Google AI Ultra plan to receive the highest rate limits.', pl: 'Możesz uaktualnić do planu Google AI Ultra, aby otrzymać najwyższe limity.' },
     // --- AI Credits opis ---
     {
         en: 'will use your AI credits to fulfill model requests once you\'re out of model quota.',
@@ -343,11 +330,6 @@ export const settingsTranslations: TranslationEntry[] = [
         pl: 'Sprawdź dostępny limit modelu i kredyty AI. Limit modelu odświeża się okresowo zgodnie z Twoim planem. Włącz przekroczenie limitu kredytów AI, aby kontynuować korzystanie z modeli po wyczerpaniu limitu.',
     },
     {
-        en: 'Model Quota',
-        pl: 'Limit modeli',
-    },
-    { en: 'Refreshes in', pl: 'Odświeżenie za' },
-    {
         en: 'View your available model quota. Quota refreshes periodically based on your plan.',
         pl: 'Sprawdź dostępny limit modelu. Limit odświeża się okresowo zgodnie z Twoim planem.',
     },
@@ -357,18 +339,6 @@ export const settingsTranslations: TranslationEntry[] = [
     },
     // --- Terms of Service ---
     { en: '"By using this app, you agree to its"', pl: '"Korzystając z tej aplikacji, zgadzasz się na"' },
-    // --- Notification Settings ---
-    { en: 'Notification Settings', pl: 'Ustawienia powiadomień' },
-    { en: 'To modify notification settings, open your operating system\'s system preferences.', pl: 'Aby zmienić ustawienia powiadomień, otwórz preferencje systemowe swojego systemu operacyjnego.' },
-    // --- Skill Custom Paths ---
-    {
-        en: 'Skill Custom Paths',
-        pl: 'Własne ścieżki umiejętności',
-    },
-    {
-        en: 'In addition to the custom skills folder, Antigravity will search the following paths in order to find skills for the agent.',
-        pl: 'Oprócz folderu własnych umiejętności Antigravity przeszuka poniższe ścieżki, aby znaleźć umiejętności dla agenta.',
-    },
 ];
 
 // =====================================================================
@@ -383,10 +353,6 @@ export const agentManagerTranslations: TranslationEntry[] = [
     {
         en: 'Create multiple agents to tackle different tasks in an agent-first UX.',
         pl: 'Twórz wielu agentów do realizacji różnych zadań w interfejsie zorientowanym na agentów.',
-    },
-    {
-        en: 'Use the editor when you want to write code or focus on one task alongside one agent.',
-        pl: 'Użyj edytora, gdy chcesz pisać kod lub skupić się na jednym zadaniu razem z jednym agentem.',
     },
     // --- Sidebar text:"..." ---
     { en: 'text:"New Conversation"', pl: 'text:"Nowa rozmowa"' },
@@ -483,21 +449,6 @@ export const onboardingTranslations: TranslationEntry[] = [
 //  J. CHILDREN — DUŻE (dłuższe napisy, dialogi, statusy, feedback)
 // =====================================================================
 export const childrenLongTranslations: TranslationEntry[] = [
-    { en: 'children:"Allow List Terminal Commands"', pl: 'children:"Lista dozwolonych poleceń terminala"' },
-    { en: 'children:"Deny List Terminal Commands"', pl: 'children:"Lista zablokowanych poleceń terminala"' },
-    { en: 'children:"Allow List Entry"', pl: 'children:"Wpis listy dozwolonych"' },
-    { en: 'children:"Deny List Entry"', pl: 'children:"Wpis listy zablokowanych"' },
-    { en: 'children:"Notification Settings"', pl: 'children:"Ustawienia powiadomień"' },
-    { en: 'children:"Add MCP Servers"', pl: 'children:"Dodaj serwery MCP"' },
-    { en: 'children:"Cloud Run"', pl: 'children:"Cloud Run"' },
-    { en: 'children:"Enable Antigravity to deploy apps to Google Cloud Run."', pl: 'children:"Włącz Antigravity, aby wdrażać aplikacje w Google Cloud Run."' },
-    { en: 'children:"Google Kubernetes Engine (OSS)"', pl: 'children:"Google Kubernetes Engine (OSS)"' },
-    { en: 'children:"Enable Antigravity to interact with Google Kubernetes Engine (GKE)."', pl: 'children:"Włącz Antigravity, aby współpracować z Google Kubernetes Engine (GKE)."' },
-    { en: 'children:"Add MCP server"', pl: 'children:"Dodaj serwer MCP"' },
-    { en: 'children:"Knowledge Catalog"', pl: 'children:"Katalog wiedzy"' },
-    { en: 'children:"Add MCP servers"', pl: 'children:"Dodaj serwery MCP"' },
-    { en: 'children:"Add MCP server"', pl: 'children:"Dodaj serwer MCP"' },
-    { en: 'children:"Use the editor when you want to write code or focus on one task alongside one agent."', pl: 'children:"Użyj edytora, gdy chcesz pisać kod lub skupić się na jednym zadaniu razem z jednym agentem."' },
     // --- Agent Manager ---
     { en: 'children:"Agent Manager"', pl: 'children:"Menedżer Agentów"' },
     { en: 'children:"Agent Script Command Configuration"', pl: 'children:"Konfiguracja poleceń skryptu agenta"' },
@@ -597,7 +548,7 @@ export const childrenLongTranslations: TranslationEntry[] = [
     { en: 'children:"Add Model"', pl: 'children:"Dodaj model"' },
     { en: '?"Add Custom Model":"Edit Custom Model"', pl: '?"Dodaj własny model":"Edytuj własny model"' },
     { en: 'children:"Edit Model"', pl: 'children:"Edytuj model"' },
-    { en: 'children:"Model"', pl: 'children:"Model"' },
+    { en: 'children:"Model"', pl: 'children:"Model AI"' },
     { en: 'children:"Unable to determine quota"', pl: 'children:"Nie można określić limitu"' },
     // --- Skills ---
     { en: 'children:"Skills"', pl: 'children:"Umiejętności"' },
@@ -638,7 +589,7 @@ export const childrenLongTranslations: TranslationEntry[] = [
     { en: 'children:"View Diff"', pl: 'children:"Pokaż różnice"' },
     { en: 'children:"Open Setup Window"', pl: 'children:"Otwórz okno konfiguracji"' },
     { en: 'children:"Open System Preferences"', pl: 'children:"Otwórz preferencje systemowe"' },
-    { en: 'children:"Open URL"', pl: 'children:"Otwórz URL"' },
+    { en: 'children:"Open URL"', pl: 'children:"Otwórz adres URL"' },
     { en: 'children:"Open local folder"', pl: 'children:"Otwórz folder lokalny"' },
     { en: 'children:"Open remote folder"', pl: 'children:"Otwórz folder zdalny"' },
     { en: 'children:"Close Folder"', pl: 'children:"Zamknij folder"' },
@@ -657,7 +608,7 @@ export const childrenLongTranslations: TranslationEntry[] = [
     { en: 'children:"Allow Once"', pl: 'children:"Zezwól raz"' },
     { en: 'children:"Allow This Conversation"', pl: 'children:"Zezwól w tej rozmowie"' },
     { en: 'children:"Add them to allow future interactions"', pl: 'children:"Dodaj, aby zezwolić na przyszłe interakcje"' },
-    { en: 'children:"The associated worktree will also be deleted."', pl: 'children:"Powiązany worktree również zostanie usunięty."' },
+    { en: 'children:"The associated worktree will also be deleted."', pl: 'children:"Powiązane drzewo robocze również zostanie usunięte."' },
     { en: 'children:"The agent was prevented from accessing some sites"', pl: 'children:"Agentowi zablokowano dostęp do niektórych stron"' },
     { en: 'children:"The agent will frequently ask for review."', pl: 'children:"Agent będzie często pytać o przegląd."' },
     { en: 'children:"The agent will never request for review."', pl: 'children:"Agent nigdy nie poprosi o przegląd."' },
@@ -682,7 +633,7 @@ export const childrenLongTranslations: TranslationEntry[] = [
     { en: 'children:"Comments"', pl: 'children:"Komentarze"' },
     { en: 'children:"Custom"', pl: 'children:"Własne"' },
     { en: 'children:"Filter"', pl: 'children:"Filtruj"' },
-    { en: 'children:"Prompt"', pl: 'children:"Prompt"' },
+    { en: 'children:"Prompt"', pl: 'children:"Polecenie"' },
     { en: 'children:"Goal"', pl: 'children:"Cel"' },
     { en: 'children:"Value"', pl: 'children:"Wartość"' },
     { en: 'children:"Command"', pl: 'children:"Polecenie"' },
@@ -752,7 +703,7 @@ export const childrenLongTranslations: TranslationEntry[] = [
     { en: 'children:"System Message"', pl: 'children:"Wiadomość systemowa"' },
     { en: '"aria-label":"Confirm Browser Interaction"', pl: '"aria-label":"Potwierdź interakcję z przeglądarką"' },
     { en: 'label:"Confirm Window Reload"', pl: 'label:"Potwierdź przeładowanie okna"' },
-    { en: 'children:"Focus Editor"', pl: 'children:"Fokus na edytorze"' },
+    { en: 'children:"Focus Editor"', pl: 'children:"Skup na edytorze"' },
     { en: 'children:"Forward"', pl: 'children:"Dalej"' },
     { en: 'children:"Hide Editor"', pl: 'children:"Ukryj edytor"' },
     { en: 'children:"Command Line"', pl: 'children:"Wiersz poleceń"' },
@@ -777,7 +728,6 @@ export const childrenShortTranslations: TranslationEntry[] = [
     { en: 'children:"Reject"', pl: 'children:"Odrzuć"' },
     { en: 'children:"Dismiss"', pl: 'children:"Zamknij"' },
     { en: 'children:"Add"', pl: 'children:"Dodaj"' },
-    { en: 'children:"+ Add"', pl: 'children:"+ Dodaj"' },
     { en: 'children:"Refresh"', pl: 'children:"Odśwież"' },
     { en: 'children:"Email"', pl: 'children:"E-mail"' },
     { en: 'children:"Sign out"', pl: 'children:"Wyloguj się"' },
@@ -786,6 +736,11 @@ export const childrenShortTranslations: TranslationEntry[] = [
     { en: 'children:"Thinking"', pl: 'children:"Myślenie"' },
     { en: 'children:"Cancel step"', pl: 'children:"Anuluj krok"' },
     { en: 'children:"Cancel command"', pl: 'children:"Anuluj polecenie"' },
+    { en: 'children:"Continue"', pl: 'children:"Kontynuuj"' },
+    { en: 'children:"Add context"', pl: 'children:"Dodaj kontekst"' },
+    { en: 'children:"Add Comment"', pl: 'children:"Dodaj komentarz"' },
+    { en: 'children:"Confirm Browser Interaction"', pl: 'children:"Potwierdź interakcję z przeglądarką"' },
+    { en: 'children:"Confirm Window Reload"', pl: 'children:"Potwierdź przeładowanie okna"' },
 ];
 
 // =====================================================================
@@ -816,8 +771,8 @@ export const quotedStringsTranslations: TranslationEntry[] = [
     { en: '"Toggle Planning Mode"', pl: '"Przełącz tryb planowania"' },
     { en: '"Toggle Model Selector"', pl: '"Przełącz wybór modelu"' },
     { en: '"Toggle Editor"', pl: '"Przełącz edytor"' },
-    { en: '"Focus Editor"', pl: '"Fokus na edytorze"' },
-    { en: '"Focus Input"', pl: '"Fokus na polu tekstowym"' },
+    { en: '"Focus Editor"', pl: '"Skup na edytorze"' },
+    { en: '"Focus Input"', pl: '"Skup na polu wejściowym"' },
     { en: '"Find in Pane"', pl: '"Znajdź w panelu"' },
     { en: '"Zoom In"', pl: '"Powiększ"' },
     { en: '"Zoom Out"', pl: '"Pomniejsz"' },
@@ -938,12 +893,206 @@ export const quotedStringsTranslations: TranslationEntry[] = [
 export const labelTranslations: TranslationEntry[] = [
     { en: 'label:"New Conversation"', pl: 'label:"Nowa rozmowa"' },
     { en: 'label:"Local",description:"Run in your current workspace"', pl: 'label:"Lokalnie",description:"Uruchom w bieżącym obszarze roboczym"' },
-    { en: 'label:"Worktree",description:"Run in a new worktree"', pl: 'label:"Worktree",description:"Uruchom w nowym worktree"' },
+    { en: 'label:"Worktree",description:"Run in a new worktree"', pl: 'label:"Drzewo robocze",description:"Uruchom w nowym drzewie roboczym"' },
 ];
 
 // =====================================================================
 //  EKSPORT: WSZYSTKIE TŁUMACZENIA W PRAWDZIWEJ KOLEJNOŚCI
 // =====================================================================
+// =====================================================================
+// NOWE TŁUMACZENIA Z PODANEJ LISTY
+// =====================================================================
+export const additionalUpdateTranslations: TranslationEntry[] = [
+    { en: 'When toggled on, Antigravity collects usage data to help Google enhance performance and features.', pl: 'Po włączeniu Antigravity zbiera dane użycia, aby pomóc Google poprawiać wydajność i funkcje.' },
+    { en: 'Marketing Emails', pl: 'E-maile marketingowe' },
+    { en: 'Receive product updates, tips, and promotions from Google Antigravity via email.', pl: 'Otrzymuj przez e-mail aktualizacje produktu, wskazówki i promocje od Google Antigravity.' },
+    { en: 'Your Plan: Google AI Pro', pl: 'Twój plan: Google AI Pro' },
+    { en: 'You can upgrade to the Google AI Ultra plan to receive the highest rate limits.', pl: 'Możesz przejść na plan Google AI Ultra, aby uzyskać najwyższe limity.' },
+    { en: 'GCP Project ID for enterprise features.', pl: 'Identyfikator projektu GCP dla funkcji korporacyjnych.' },
+    { en: 'Enable Demo Mode (Beta)', pl: 'Włącz tryb demonstracyjny (Beta)' },
+    { en: 'When enabled, your UI will be slightly modified to ensure more consistent demos. This is only recommended for demo purposes. In most cases, you can run \\"Antigravity: Start Demo Mode\\" and \\"Antigravity: Stop Demo Mode\\" to control this switch and update your ~/.gemini/antigravity data directory.', pl: 'Po włączeniu interfejs zostanie nieznacznie zmieniony, aby prezentacje były bardziej spójne. To ustawienie zaleca się wyłącznie do pokazów. Zwykle możesz użyć poleceń \\"Antigravity: Start Demo Mode\\" i \\"Antigravity: Stop Demo Mode\\", aby sterować tym przełącznikiem i zaktualizować katalog ~/.gemini/antigravity.' },
+    { en: 'Control which URLs the browser can access. Add domains or full URLs to the allowlist.', pl: 'Kontroluj, do których adresów URL przeglądarka ma dostęp. Dodaj domeny lub pełne adresy URL do listy dozwolonych.' },
+    { en: 'Notification Settings', pl: 'Ustawienia powiadomień' },
+    { en: `To modify notification settings, open your operating system's system preferences.`, pl: 'Aby zmienić ustawienia powiadomień, otwórz preferencje systemowe swojego systemu operacyjnego.' },
+    { en: `When toggled on, Antigravity will use your AI credits to fulfill model requests once you're out of model quota. Antigravity will always use your model quota first before using AI credits.`, pl: 'Po włączeniu Antigravity użyje kredytów AI do realizacji żądań modelu po wyczerpaniu limitu modelu. Antigravity zawsze najpierw wykorzysta limit modelu, a dopiero później kredyty AI.' },
+    { en: 'View your available model quota and AI credits. Model quota refreshes periodically based on your plan. Enable AI Credit Overages to continue using models when your quota is exhausted.', pl: 'Sprawdź dostępny limit modelu i kredyty AI. Limit modelu odświeża się okresowo zgodnie z Twoim planem. Włącz przekroczenia kredytów AI, aby dalej korzystać z modeli po wyczerpaniu limitu.' },
+    { en: 'Skill Custom Paths', pl: 'Niestandardowe ścieżki umiejętności' },
+    { en: 'In addition to the custom skills folder, Antigravity will search the following paths in order to find skills for the agent.', pl: 'Oprócz folderu niestandardowych umiejętności Antigravity będzie przeszukiwać poniższe ścieżki, aby znaleźć umiejętności dla agenta.' },
+    { en: 'Add MCP Servers', pl: 'Dodaj serwery MCP' },
+    { en: 'Cloud Run', pl: 'Cloud Run' },
+    { en: 'Enable Antigravity to deploy apps to Google Cloud Run.', pl: 'Zezwól Antigravity na wdrażanie aplikacji do Google Cloud Run.' },
+    { en: 'Google Kubernetes Engine (OSS)', pl: 'Google Kubernetes Engine (OSS)' },
+    { en: 'Enable Antigravity to interact with Google Kubernetes Engine (GKE).', pl: 'Zezwól Antigravity na pracę z Google Kubernetes Engine (GKE).' },
+    { en: 'The Dart and Flutter MCP server exposes Dart (and Flutter) development tool actions to compatible AI-assistant clients.', pl: 'Serwer MCP dla Dart i Flutter udostępnia działania narzędzi programistycznych Dart (i Flutter) kompatybilnym klientom asystentów AI.' },
+    { en: `The Firebase Model Context Protocol (MCP) Server gives AI-powered development tools the ability to work with your Firebase projects and your app's codebase.`, pl: 'Serwer Firebase Model Context Protocol (MCP) daje narzędziom programistycznym opartym o AI możliwość pracy z projektami Firebase i kodem Twojej aplikacji.' },
+    { en: 'The Genkit Model Context Protocol (MCP) Server gives AI-powered development tools the ability to build, debug and inspect your Genkit app.', pl: 'Serwer Genkit Model Context Protocol (MCP) pozwala narzędziom programistycznym opartym o AI budować, diagnozować i analizować aplikację Genkit.' },
+    { en: 'Interact with your BigQuery data using natural language. This MCP server allows you to securely connect to your datasets to search the datasets, inspect table metadata, execute SQL queries, generate time-series forecasts, and perform contribution analysis directly from your AI tools.', pl: 'Pracuj z danymi BigQuery przy użyciu języka naturalnego. Ten serwer MCP umożliwia bezpieczne łączenie z zestawami danych, ich przeszukiwanie, analizę metadanych tabel, wykonywanie zapytań SQL, tworzenie prognoz szeregów czasowych i analizę wkładu bezpośrednio z narzędzi AI.' },
+    { en: 'When enabled, Antigravity will use the clipboard as context for completions. May increase exposure to security exploits based on unintentional contents in clipboard.', pl: 'Po włączeniu Antigravity będzie używać schowka jako kontekstu dla uzupełnień. Może to zwiększyć ryzyko ataków wynikających z niezamierzonej zawartości schowka.' },
+    { en: 'Changes the base URL on each extension page. You must restart Antigravity to use the new marketplace after changing this value.', pl: 'Zmienia bazowy adres URL na każdej stronie rozszerzeń. Po zmianie tej wartości musisz ponownie uruchomić Antigravity, aby używać nowego marketplace.' },
+    { en: 'Changes the base URL for marketplace search results. You must restart Antigravity to use the new marketplace after changing this value.', pl: 'Zmienia bazowy adres URL wyników wyszukiwania marketplace. Po zmianie tej wartości musisz ponownie uruchomić Antigravity, aby używać nowego marketplace.' },
+    { en: 'Show \\"Edit\\" and \\"Chat\\" buttons when selecting text in the editor.', pl: 'Pokazuj przyciski \\"Edytuj\\" i \\"Czat\\" podczas zaznaczania tekstu w edytorze.' },
+    { en: 'To modify editor settings, open Settings within the editor window.', pl: 'Aby zmienić ustawienia edytora, otwórz Ustawienia w oknie edytora.' },
+    { en: 'Use the editor when you want to write code or focus on one task alongside one agent.', pl: 'Używaj edytora, gdy chcesz pisać kod lub skupić się na jednym zadaniu razem z jednym agentem.' },
+    { en: 'Provide Feedback', pl: 'Prześlij opinię' },
+    { en: 'Settings', pl: 'Ustawienia' },
+    { en: 'Knowledge', pl: 'Wiedza' },
+];
+
+export const diagnosticsTranslations: TranslationEntry[] = [
+    { en: '"A new workspace will be created for you when you start a conversation"', pl: '"Po rozpoczęciu rozmowy zostanie utworzony nowy obszar roboczy."' },
+    { en: '"Agent B"', pl: '"Agent B"' },
+    { en: '"Agent C"', pl: '"Agent C"' },
+    { en: '"Alt text:"', pl: '"Tekst alternatywny:"' },
+    { en: '"An error ID that helps the team investigate the error."', pl: '"Identyfikator błędu, który pomaga zespołowi zbadać problem."' },
+    { en: '"Arguments Schema:"', pl: '"Schemat argumentów:"' },
+    { en: '"Artifacts are created when the agent performs more complex, longer running tasks while in Planning mode."', pl: '"Artefakty są tworzone, gdy agent wykonuje bardziej złożone, długotrwałe zadania w trybie planowania."' },
+    { en: '"Browser allowlist begins with localhost and can be updated through the settings page."', pl: '"Lista dozwolonych adresów przeglądarki zaczyna się od localhost i może być aktualizowana na stronie ustawień."' },
+    { en: '"Cleared Count"', pl: '"Liczba wyczyszczonych"' },
+    { en: '"Count"', pl: '"Liczba"' },
+    { en: '"Created:"', pl: '"Utworzono:"' },
+    { en: '"Custom models are only supported on Cloudtop / Linux machines."', pl: '"Modele niestandardowe są obsługiwane tylko na maszynach Cloudtop / Linux."' },
+    { en: '"Customizations feature is currently only available for the desktop app."', pl: '"Funkcja personalizacji jest obecnie dostępna tylko w aplikacji desktopowej."' },
+    { en: '"Debug Sidebar"', pl: '"Panel boczny diagnostyki"' },
+    { en: '"Defined subagent"', pl: '"Zdefiniowany podagent"' },
+    { en: '"Description:"', pl: '"Opis:"' },
+    { en: '"Dev Mode"', pl: '"Tryb deweloperski"' },
+    { en: '"Enter the required configuration values to install this MCP server."', pl: '"Wprowadź wymagane wartości konfiguracji, aby zainstalować ten serwer MCP."' },
+    { en: '"Failed to move changes"', pl: '"Nie udało się przenieść zmian"' },
+    { en: '"Fetched network request for page."', pl: '"Pobrano żądanie sieciowe dla strony."' },
+    { en: '"Fetched network requests for page."', pl: '"Pobrano żądania sieciowe dla strony."' },
+    { en: '"Files to edit:"', pl: '"Pliki do edycji:"' },
+    { en: '"Found references to"', pl: '"Znaleziono odwołania do"' },
+    { en: '"Full Metadata"', pl: '"Pełne metadane"' },
+    { en: '"Full output written to"', pl: '"Pełny wynik zapisano do"' },
+    { en: '"Hide 0s"', pl: '"Ukryj zera"' },
+    { en: '"Image URL:"', pl: '"Adres URL obrazu:"' },
+    { en: '"Inspected commit"', pl: '"Przeanalizowano commit"' },
+    { en: '"Last Updated"', pl: '"Ostatnia aktualizacja"' },
+    { en: '"License:"', pl: '"Licencja:"' },
+    { en: '"List resources:"', pl: '"Lista zasobów:"' },
+    { en: '"Loading metrics..."', pl: '"Ładowanie metryk..."' },
+    { en: '"LS Output Debug View"', pl: '"Widok diagnostyczny danych wyjściowych LS"' },
+    { en: '"Max Tokens"', pl: '"Maksymalna liczba tokenów"' },
+    { en: '"MCP Tool: "', pl: '"Narzędzie MCP: "' },
+    { en: '"Metadata:"', pl: '"Metadane:"' },
+    { en: '"Metric"', pl: '"Metryka"' },
+    { en: '"Mouse button pressed"', pl: '"Naciśnięto przycisk myszy"' },
+    { en: '"Mouse button released"', pl: '"Zwolniono przycisk myszy"' },
+    { en: '"No cascade ID provided"', pl: '"Nie podano ID kaskady"' },
+    { en: '"No chat model metadata available for this generator"', pl: '"Brak metadanych modelu czatu dla tego generatora"' },
+    { en: '"No chat model metadata available in latest generator metadata"', pl: '"Brak metadanych modelu czatu w najnowszych metadanych generatora"' },
+    { en: '"No content available for this resource"', pl: '"Brak dostępnej zawartości dla tego zasobu"' },
+    { en: '"No generator metadata available"', pl: '"Brak dostępnych metadanych generatora"' },
+    { en: '"No message prompts available"', pl: '"Brak dostępnych poleceń wiadomości"' },
+    { en: '"No resources available"', pl: '"Brak dostępnych zasobów"' },
+    { en: '"No subagents"', pl: '"Brak podagentów"' },
+    { en: '"No token data available."', pl: '"Brak dostępnych danych tokenów."' },
+    { en: '"No tracked components"', pl: '"Brak śledzonych komponentów"' },
+    { en: '"Open SSH connection in setup window. When finished, you will be able to select the workspace in the sidebar."', pl: '"Otwórz połączenie SSH w oknie konfiguracji. Po zakończeniu będzie można wybrać obszar roboczy w panelu bocznym."' },
+    { en: '"Proceeded with"', pl: '"Kontynuowano z"' },
+    { en: '"Read resource:"', pl: '"Odczytaj zasób:"' },
+    { en: '"Read URL rejected"', pl: '"Odrzucono odczyt adresu URL"' },
+    { en: '"Rendered Step:"', pl: '"Wyrenderowany krok:"' },
+    { en: '"Rerender Effects"', pl: '"Efekty ponownego renderowania"' },
+    { en: '"Rerenders Per Second"', pl: '"Ponowne renderowania na sekundę"' },
+    { en: '"Saves to your global ~/.gemini/antigravity/agents/ directory. This script will be available across all your workspaces."', pl: '"Zapisuje do globalnego katalogu ~/.gemini/antigravity/agents/. Ten skrypt będzie dostępny we wszystkich obszarach roboczych."' },
+    { en: '"Searched\\xA0"', pl: '"Wyszukano\\xA0"' },
+    { en: '"Sherlog Links"', pl: '"Łącza Sherlog"' },
+    { en: '"Show 0s"', pl: '"Pokaż zera"' },
+    { en: '"Some non-image binary content was truncated."', pl: '"Część binarnej zawartości innej niż obraz została skrócona."' },
+    { en: '"Source:"', pl: '"Źródło:"' },
+    { en: '"Step JSON:"', pl: '"Krok JSON:"' },
+    { en: '"Step Type"', pl: '"Typ kroku"' },
+    { en: '"Step:"', pl: '"Krok:"' },
+    { en: '"Tasks can be done either in your agent manager or in an AI-powered editor."', pl: '"Zadania można wykonywać w menedżerze agentów albo w edytorze wspieranym przez AI."' },
+    { en: '"The Agent attempted to interact with some sites that are not allowlisted"', pl: '"Agent próbował wejść na strony, które nie znajdują się na liście dozwolonych."' },
+    { en: '"The agent manager is a new window allowing you to manage and create agents across workspaces."', pl: '"Menedżer agentów to nowe okno, które umożliwia zarządzanie i tworzenie agentów w wielu obszarach roboczych."' },
+    { en: '"The editor is an AI-powered IDE with code suggestions, a context-aware agent side panel, and more."', pl: '"Edytor to środowisko IDE wspierane przez AI z podpowiedziami kodu, panelem bocznym agenta zależnym od kontekstu i dodatkowymi funkcjami."' },
+    { en: '"Tool:"', pl: '"Narzędzie:"' },
+    { en: '"Trajectory Debug View"', pl: '"Widok diagnostyki trajektorii"' },
+    { en: '"Trajectory ID"', pl: '"ID trajektorii"' },
+    { en: '"Trajectory Stats"', pl: '"Statystyki trajektorii"' },
+    { en: '"Transpilation Error:"', pl: '"Błąd transpilacji:"' },
+    { en: '"Transpiling React app..."', pl: '"Transpilacja aplikacji React..."' },
+    { en: '"Unknown edit"', pl: '"Nieznana edycja"' },
+    { en: '"Unknown file edit"', pl: '"Nieznana edycja pliku"' },
+    { en: '"View could not be opened"', pl: '"Nie można było otworzyć widoku"' },
+    { en: '"We recommend attaching logs. Attaching logs will help the Antigravity team act on and prioritize your feedback."', pl: '"Zalecamy dołączanie logów. Logi pomogą zespołowi Antigravity szybciej reagować i nadawać priorytet Twojej opinii."' },
+    { en: '"What functionality you expect your account tier to have available that is missing"', pl: '"Jakiej brakującej funkcji oczekujesz w ramach swojego poziomu konta"' },
+    { en: '"What you would like to see to address this gap in your workflow"', pl: '"Co chcesz zobaczyć, aby uzupełnić tę lukę w swoim przepływie pracy"' },
+    { en: '"When debug mode is on, you can see additional information about each steps in the conversation."', pl: '"Po włączeniu trybu diagnostycznego zobaczysz dodatkowe informacje o każdym kroku rozmowy."' },
+    { en: '"When exploring an untrusted workspace with the agent, we recommend enabling strict mode via the settings window."', pl: '"Podczas pracy z agentem w niezaufanym obszarze roboczym zalecamy włączenie trybu ścisłego w oknie ustawień."' },
+    { en: '"You currently don\\\'t have any MCP Servers installed. Add a MCP tool below or add a custom one via the MCP Config."', pl: '"Obecnie nie masz zainstalowanych serwerów MCP. Dodaj poniżej narzędzie MCP albo dodaj własne przez konfigurację MCP."' },
+    { en: '"Your administrator has disabled MCP servers for this workspace."', pl: '"Administrator wyłączył serwery MCP dla tego obszaru roboczego."' },
+];
+
+export const coverageGapTranslations: TranslationEntry[] = [
+    { en: '"aria-label":"Add pending comment"', pl: '"aria-label":"Dodaj oczekujący komentarz"' },
+    { en: '"aria-label":"Clear agent script"', pl: '"aria-label":"Wyczyść skrypt agenta"' },
+    { en: '"aria-label":"Close search"', pl: '"aria-label":"Zamknij wyszukiwanie"' },
+    { en: '"aria-label":"Delete command"', pl: '"aria-label":"Usuń polecenie"' },
+    { en: '"aria-label":"Deny setting up browser"', pl: '"aria-label":"Odrzuć konfigurację przeglądarki"' },
+    { en: '"aria-label":"Dismiss error"', pl: '"aria-label":"Zamknij błąd"' },
+    { en: '"aria-label":"Dismiss suggested actions"', pl: '"aria-label":"Zamknij sugerowane akcje"' },
+    { en: '"aria-label":"Loading knowledge items"', pl: '"aria-label":"Ładowanie elementów wiedzy"' },
+    { en: '"aria-label":"Message input"', pl: '"aria-label":"Pole wprowadzania wiadomości"' },
+    { en: '"aria-label":"Open Browser Setup"', pl: '"aria-label":"Otwórz konfigurację przeglądarki"' },
+    { en: '"aria-label":"Options"', pl: '"aria-label":"Opcje"' },
+    { en: '"aria-label":"Refresh custom agents"', pl: '"aria-label":"Odśwież własnych agentów"' },
+    { en: '"aria-label":"Send message"', pl: '"aria-label":"Wyślij wiadomość"' },
+    { en: 'children:"Actionable"', pl: 'children:"Wymaga działania"' },
+    { en: 'children:"Agent A"', pl: 'children:"Agent A"' },
+    { en: 'children:"Agent Decides"', pl: 'children:"Agent decyduje"' },
+    { en: 'children:"Always Proceed"', pl: 'children:"Zawsze kontynuuj"' },
+    { en: 'children:"Approve"', pl: 'children:"Zatwierdź"' },
+    { en: 'children:"Auto-run Unsupported"', pl: 'children:"Automatyczne uruchamianie nieobsługiwane"' },
+    { en: 'children:"Base URL:"', pl: 'children:"Bazowy adres URL:"' },
+    { en: 'children:"Battle mode is not available"', pl: 'children:"Tryb pojedynku jest niedostępny"' },
+    { en: 'children:"Battle"', pl: 'children:"Pojedynek"' },
+    { en: 'children:"BYOM/Custom Override:"', pl: 'children:"BYOM/Własne nadpisanie:"' },
+    { en: 'children:"Cache:"', pl: 'children:"Pamięć podręczna:"' },
+    { en: 'children:"Chat Model Metadata"', pl: 'children:"Metadane modelu czatu"' },
+    { en: 'children:"Chat Model Name:"', pl: 'children:"Nazwa modelu czatu:"' },
+    { en: 'children:"Create multiple agents to tackle different tasks in an agent-first UX."', pl: 'children:"Twórz wielu agentów do realizacji różnych zadań w interfejsie zorientowanym na agentów."' },
+    { en: 'children:"Input:"', pl: 'children:"Wejście:"' },
+    { en: 'children:"Keyboard Shortcuts"', pl: 'children:"Skróty klawiszowe"' },
+    { en: 'children:"List resources: "', pl: 'children:"Lista zasobów: "' },
+    { en: 'children:"Model Label"', pl: 'children:"Etykieta modelu"' },
+    { en: 'children:"Model Name:"', pl: 'children:"Nazwa modelu:"' },
+    { en: 'children:"Model URL"', pl: 'children:"Adres URL modelu"' },
+    { en: 'children:"Model:"', pl: 'children:"Model AI:"' },
+    { en: 'children:"Modified files:"', pl: 'children:"Zmienione pliki:"' },
+    { en: 'children:"Needs input"', pl: 'children:"Wymaga danych wejściowych"' },
+    { en: 'children:"No active skills"', pl: 'children:"Brak aktywnych umiejętności"' },
+    { en: 'children:"No background tasks"', pl: 'children:"Brak zadań w tle"' },
+    { en: 'children:"No build files are updated."', pl: 'children:"Żadne pliki kompilacji nie zostały zaktualizowane."' },
+    { en: 'children:"Open in Cider"', pl: 'children:"Otwórz w Cider"' },
+    { en: 'children:"Other:"', pl: 'children:"Inne:"' },
+    { en: 'children:"Output:"', pl: 'children:"Wynik:"' },
+    { en: 'children:"Pricing is based on public API pricing"', pl: 'children:"Cennik opiera się na publicznych cenach API"' },
+    { en: 'children:"Read resource: "', pl: 'children:"Odczytaj zasób: "' },
+    { en: 'children:"Request Review"', pl: 'children:"Poproś o przegląd"' },
+    { en: 'children:"Restore"', pl: 'children:"Przywróć"' },
+    { en: 'children:"Select all that apply"', pl: 'children:"Wybierz wszystkie pasujące opcje"' },
+    { en: 'children:"Select Models"', pl: 'children:"Wybierz modele"' },
+    { en: 'children:"Shortcuts"', pl: 'children:"Skróty"' },
+    { en: 'children:"Single"', pl: 'children:"Pojedynczy"' },
+    { en: 'children:"Skip (Esc)"', pl: 'children:"Pomiń (Esc)"' },
+    { en: 'children:"This chat is archived."', pl: 'children:"Ten czat jest zarchiwizowany."' },
+    { en: 'children:"Title:"', pl: 'children:"Tytuł:"' },
+    { en: 'children:"To modify editor settings, open Settings within the editor window."', pl: 'children:"Aby zmienić ustawienia edytora, otwórz Ustawienia w oknie edytora."' },
+    { en: 'children:"To modify notification settings, open your operating system\'s system preferences."', pl: 'children:"Aby zmienić ustawienia powiadomień, otwórz preferencje systemowe swojego systemu operacyjnego."' },
+    { en: 'children:"Tool: "', pl: 'children:"Narzędzie: "' },
+    { en: 'children:"Try Again"', pl: 'children:"Spróbuj ponownie"' },
+    { en: 'children:"Unknown Notebook"', pl: 'children:"Nieznany notatnik"' },
+    { en: 'children:"Use the editor when you want to write code or focus on one task alongside one agent."', pl: 'children:"Używaj edytora, gdy chcesz pisać kod lub skupić się na jednym zadaniu razem z jednym agentem."' },
+    { en: 'children:"User cancelled agent execution."', pl: 'children:"Użytkownik anulował wykonanie przez agenta."' },
+    { en: 'text:"Async functions can only be declared at the top level or inside a block."', pl: 'text:"Funkcje asynchroniczne można deklarować tylko na najwyższym poziomie lub wewnątrz bloku."' },
+    { en: 'text:"Generators can only be declared at the top level or inside a block."', pl: 'text:"Generatory można deklarować tylko na najwyższym poziomie lub wewnątrz bloku."' },
+    { en: 'text:"Initializers are not allowed in ambient contexts."', pl: 'text:"Inicjalizatory nie są dozwolone w kontekstach deklaratywnych."' },
+    { en: 'text:"More"', pl: 'text:"Więcej"' },
+];
+
 export function getAllTranslations(): TranslationEntry[] {
     return [
         // 1. Sidebar component injection (musi być przed innymi children)
@@ -972,5 +1121,12 @@ export function getAllTranslations(): TranslationEntry[] {
         ...quotedStringsTranslations,
         // 13. Children — krótkie (NA KOŃCU — shortest last)
         ...childrenShortTranslations,
+        // 14. Diagnostyka, debug i rzadziej widoczne frazy
+        ...diagnosticsTranslations,
+        // 15. Braki wykryte przez audyt pokrycia
+        ...coverageGapTranslations,
+        // 16. Dodatkowe aktualizacje i ujednolicenia
+        ...additionalUpdateTranslations,
     ];
 }
+

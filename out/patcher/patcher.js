@@ -88,6 +88,10 @@ function applyPolishPatch() {
             message: 'Nie znaleziono instalacji Antigravity. Upewnij się, że program jest zainstalowany.',
             replacedCount: 0,
             skippedCount: 0,
+            unmatchedCount: 0,
+            ambiguousCount: 0,
+            exactAppliedCount: 0,
+            regexAppliedCount: 0,
             details: []
         };
     }
@@ -104,6 +108,10 @@ function applyPolishPatch() {
             message: `Nie można odczytać pliku: ${paths.jetskiMain}. Błąd: ${err}`,
             replacedCount: 0,
             skippedCount: 0,
+            unmatchedCount: 0,
+            ambiguousCount: 0,
+            exactAppliedCount: 0,
+            regexAppliedCount: 0,
             details: []
         };
     }
@@ -118,34 +126,91 @@ function applyPolishPatch() {
                 message: `Nie można utworzyć kopii zapasowej: ${err}`,
                 replacedCount: 0,
                 skippedCount: 0,
+                unmatchedCount: 0,
+                ambiguousCount: 0,
+                exactAppliedCount: 0,
+                regexAppliedCount: 0,
                 details: []
             };
         }
     }
-    const translations = (0, translations_1.getAllTranslations)();
+    const preparedTranslations = prepareTranslations((0, translations_1.getAllTranslations)());
+    const duplicateConflicts = findDuplicateConflicts(preparedTranslations);
     let replaced = 0;
     let skipped = 0;
+    let unmatched = 0;
+    let ambiguous = 0;
+    let exactApplied = 0;
+    let regexApplied = 0;
     const details = [];
-    for (const t of translations) {
-        if (content.includes(t.en)) {
-            // Sprawdź czy nie jest już przetłumaczone (idempotentność)
-            if (t.en !== t.pl) {
-                content = content.split(t.en).join(t.pl);
-                replaced++;
-                details.push(`✅ ${t.en.substring(0, 40)}...`);
+    if (duplicateConflicts.length > 0) {
+        ambiguous += duplicateConflicts.length;
+        for (const conflict of duplicateConflicts) {
+            details.push(`⚠️ Kolizja mapowania EN: ${truncate(conflict.en)} -> [${conflict.translations.map(truncate).join(' | ')}]`);
+        }
+    }
+    const unsafeShortPatterns = detectUnsafeShortPatterns(preparedTranslations);
+    if (unsafeShortPatterns.size > 0) {
+        ambiguous += unsafeShortPatterns.size;
+        for (const token of unsafeShortPatterns) {
+            details.push(`⚠️ Potencjalna kolizja krótkiego tekstu: ${truncate(token)}`);
+        }
+    }
+    for (const t of preparedTranslations) {
+        if (t.entry.en === t.entry.pl) {
+            skipped++;
+            continue;
+        }
+        if (t.mode === 'regex') {
+            const regex = buildRegex(t.entry.en, t.flags);
+            if (!regex) {
+                skipped++;
+                ambiguous++;
+                details.push(`⚠️ Błędny regex: ${truncate(t.entry.en)}`);
+                continue;
+            }
+            const matches = content.match(regex);
+            const count = matches ? matches.length : 0;
+            if (count > 0) {
+                content = content.replace(regex, t.entry.pl);
+                replaced += count;
+                regexApplied++;
+                details.push(`✅ [regex x${count}] ${truncate(t.entry.en)}`);
+            }
+            else if (content.includes(t.entry.pl)) {
+                skipped++;
+                details.push(`⏭️ Już PL: ${truncate(t.entry.pl)}`);
             }
             else {
                 skipped++;
+                unmatched++;
+                details.push(`⚠️ Nie znaleziono (regex): ${truncate(t.entry.en)}`);
             }
+            continue;
         }
-        else if (content.includes(t.pl)) {
+        // exact
+        if (isUnsafeExactEntry(t.entry.en) && !isContextAnchoredExactEntry(t.entry.en)) {
             // Już przetłumaczone
             skipped++;
-            details.push(`⏭️ Już PL: ${t.pl.substring(0, 40)}...`);
+            ambiguous++;
+            details.push(`⚠️ Pominięto ryzykowny krótki wpis exact: ${truncate(t.entry.en)}`);
+            continue;
+        }
+        const occurrenceCount = countOccurrences(content, t.entry.en);
+        if (occurrenceCount > 0) {
+            content = content.split(t.entry.en).join(t.entry.pl);
+            replaced += occurrenceCount;
+            exactApplied++;
+            details.push(`✅ [exact x${occurrenceCount}] ${truncate(t.entry.en)}`);
+        }
+        else if (content.includes(t.entry.pl)) {
+            skipped++;
+            details.push(`⏭️ Już PL: ${truncate(t.entry.pl)}`);
         }
         else {
             skipped++;
-            details.push(`⚠️ Nie znaleziono: ${t.en.substring(0, 40)}...`);
+            unmatched++;
+            details.push(`⚠️ Nie znaleziono: ${truncate(t.entry.en)}`);
         }
     }
     // Zapisz spatchowany plik
@@ -159,6 +224,10 @@ function applyPolishPatch() {
                 message: `Nie można zapisać spatchowanego pliku: ${err}. Możliwe, że Antigravity jest uruchomiony — zamknij go i spróbuj ponownie.`,
                 replacedCount: 0,
                 skippedCount: 0,
+                unmatchedCount: unmatched,
+                ambiguousCount: ambiguous,
+                exactAppliedCount: exactApplied,
+                regexAppliedCount: regexApplied,
                 details
             };
         }
@@ -178,6 +247,10 @@ function applyPolishPatch() {
             : 'Interfejs jest już spolszczony — nie trzeba nic zmieniać.',
         replacedCount: replaced,
         skippedCount: skipped,
+        unmatchedCount: unmatched,
+        ambiguousCount: ambiguous,
+        exactAppliedCount: exactApplied,
+        regexAppliedCount: regexApplied,
         details
     };
 }
@@ -213,6 +286,10 @@ function restoreOriginal() {
             message: 'Nie znaleziono instalacji Antigravity.',
             replacedCount: 0,
             skippedCount: 0,
+            unmatchedCount: 0,
+            ambiguousCount: 0,
+            exactAppliedCount: 0,
+            regexAppliedCount: 0,
             details: []
         };
     }
@@ -222,6 +299,10 @@ function restoreOriginal() {
             message: 'Nie znaleziono kopii zapasowej — oryginalny plik nie był modyfikowany lub backup został usunięty.',
             replacedCount: 0,
             skippedCount: 0,
+            unmatchedCount: 0,
+            ambiguousCount: 0,
+            exactAppliedCount: 0,
+            regexAppliedCount: 0,
             details: []
         };
     }
@@ -237,6 +318,10 @@ function restoreOriginal() {
             message: 'Przywrócono oryginalną (angielską) wersję interfejsu. Uruchom ponownie Antigravity.',
             replacedCount: 0,
             skippedCount: 0,
+            unmatchedCount: 0,
+            ambiguousCount: 0,
+            exactAppliedCount: 0,
+            regexAppliedCount: 0,
             details: ['Backup przywrócony pomyślnie']
         };
     }
@@ -246,6 +331,10 @@ function restoreOriginal() {
             message: `Błąd podczas przywracania: ${err}. Zamknij Antigravity i spróbuj ponownie.`,
             replacedCount: 0,
             skippedCount: 0,
+            unmatchedCount: 0,
+            ambiguousCount: 0,
+            exactAppliedCount: 0,
+            regexAppliedCount: 0,
             details: []
         };
     }
@@ -265,17 +354,18 @@ function checkPatchStatus() {
     catch {
         return { patched: false, canPatch: false, details: 'Nie można odczytać pliku Antigravity.' };
     }
-    const translations = (0, translations_1.getAllTranslations)();
+    const translations = prepareTranslations((0, translations_1.getAllTranslations)());
     let polishFound = 0;
     let englishFound = 0;
     for (const t of translations) {
-        if (t.en === t.pl) {
+        if (t.entry.en === t.entry.pl) {
             continue;
         }
-        if (content.includes(t.pl)) {
+        if (content.includes(t.entry.pl)) {
             polishFound++;
+            continue;
         }
-        else if (content.includes(t.en)) {
+        if (t.mode === 'exact' && content.includes(t.entry.en)) {
             englishFound++;
         }
     }
@@ -293,5 +383,105 @@ function checkPatchStatus() {
             details: `Stan mieszany: ${polishFound} PL / ${englishFound} EN. Uruchom patchowanie ponownie.`
         };
     }
+}
+function prepareTranslations(entries) {
+    return entries
+        .map((entry, index) => ({
+        entry,
+        mode: entry.mode ?? 'exact',
+        flags: normalizeRegexFlags(entry.flags),
+        priority: entry.priority ?? 0,
+        index,
+    }))
+        .sort((a, b) => {
+        if (a.priority !== b.priority) {
+            return b.priority - a.priority;
+        }
+        if (a.entry.en.length !== b.entry.en.length) {
+            return b.entry.en.length - a.entry.en.length;
+        }
+        return a.index - b.index;
+    });
+}
+function normalizeRegexFlags(flags) {
+    if (!flags || flags.trim().length === 0) {
+        return 'g';
+    }
+    const unique = Array.from(new Set(flags.split('')));
+    if (!unique.includes('g')) {
+        unique.push('g');
+    }
+    return unique.join('');
+}
+function findDuplicateConflicts(entries) {
+    const grouped = new Map();
+    for (const item of entries) {
+        if (item.mode !== 'exact') {
+            continue;
+        }
+        const key = item.entry.en;
+        if (!grouped.has(key)) {
+            grouped.set(key, new Set());
+        }
+        grouped.get(key)?.add(item.entry.pl);
+    }
+    const conflicts = [];
+    for (const [en, variants] of grouped.entries()) {
+        if (variants.size > 1) {
+            conflicts.push({ en, translations: Array.from(variants) });
+        }
+    }
+    return conflicts;
+}
+function detectUnsafeShortPatterns(entries) {
+    const shortEntries = entries
+        .filter(e => e.mode === 'exact')
+        .map(e => e.entry.en)
+        .filter(en => isUnsafeExactEntry(en));
+    const unsafe = new Set();
+    for (const token of shortEntries) {
+        if (isContextAnchoredExactEntry(token)) {
+            continue;
+        }
+        for (const other of shortEntries) {
+            if (token === other) {
+                continue;
+            }
+            if (other.includes(token) || token.includes(other)) {
+                unsafe.add(token);
+                break;
+            }
+        }
+    }
+    return unsafe;
+}
+function isUnsafeExactEntry(en) {
+    const cleaned = en.replace(/['"`]/g, '').trim();
+    return cleaned.length > 0 &&
+        cleaned.length <= 10 &&
+        /^[A-Za-z][A-Za-z0-9 ]*$/.test(cleaned);
+}
+function isContextAnchoredExactEntry(en) {
+    return /(children:|label:|title:|text:|placeholder:|tooltip|aria-label|return|dialogTitle:|submitLabel:|\|\||\?")/.test(en);
+}
+function buildRegex(pattern, flags) {
+    try {
+        return new RegExp(pattern, flags);
+    }
+    catch {
+        return null;
+    }
+}
+function countOccurrences(content, search) {
+    if (!search.length) {
+        return 0;
+    }
+    return content.split(search).length - 1;
+}
+function truncate(value, max = 80) {
+    if (value.length <= max) {
+        return value;
+    }
+    return value.slice(0, max) + '...';
 }
 //# sourceMappingURL=patcher.js.map

@@ -1,35 +1,35 @@
 {
   "contents": {
     "package": {
-      "command.openAgentManager": "Antigravity PL: Menedżer Agentów — przewodnik",
+      "command.openAgentManager": "Antigravity PL: Menedżer agentów — przewodnik",
       "configuration.title": "Antigravity Polski",
       "configuration.showStatusBar.description": "Pokaż ikonę 🌐 na pasku stanu do szybkiego dostępu"
     },
     "agent-manager/ui": {
-      "agent.manager.title": "Menedżer Agentów",
+      "agent.manager.title": "Menedżer agentów",
       "agent.manager.subtitle": "Podgląd i zarządzanie projektem z lotu ptaka",
       "agent.manager.toggle": "Przełącz widok (Ctrl+E / Cmd+E)",
       "agent.manager.sidebar": "Panel boczny",
-      "agent.manager.conversation": "Widok konwersacji",
+      "agent.manager.conversation": "Widok rozmowy",
       "agent.manager.inbox": "Skrzynka odbiorcza",
       "agent.manager.playground": "Plac zabaw",
       "agent.manager.panes": "Panele",
       "agent.manager.changes": "Zmiany",
       "agent.manager.sources": "Źródła",
       "agent.manager.browser": "Przeglądarka",
-      "conversation.view": "Widok konwersacji",
+      "conversation.view": "Widok rozmowy",
       "conversation.view.desc": "Główny czat z agentem AI — tu zadajesz pytania i zlecasz zadania",
       "inbox": "Skrzynka odbiorcza",
       "inbox.desc": "Powiadomienia od agenta wymagające Twojej uwagi lub akceptacji",
       "playground": "Plac zabaw",
-      "playground.desc": "Testuj prompty i eksperymentuj z odpowiedziami modeli",
+      "playground.desc": "Testuj polecenia i eksperymentuj z odpowiedziami modeli",
       "panes": "Panele",
       "panes.desc": "Konfiguracja widoków podzielonych — ustawienie co widać w poszczególnych sekcjach",
       "changes.sidebar": "Panel zmian",
       "changes.sidebar.desc": "Przegląd wszystkich zmian wprowadzonych przez agenta z możliwością akceptacji/odrzucenia",
       "sources.panel": "Panel źródeł",
       "sources.panel.desc": "Lista plików i zasobów używanych jako kontekst konwersacji",
-      "browser.subagent": "Sub-agent przeglądarki",
+      "browser.subagent": "Podagent przeglądarki",
       "browser.subagent.desc": "Wbudowana przeglądarka do testowania stron internetowych i aplikacji webowych"
     },
     "agent-manager/modes": {
@@ -39,14 +39,14 @@
       "mode.fast.desc": "Agent natychmiast implementuje rozwiązania. Szybszy, ale mniej ostrożny."
     },
     "agent-manager/dictionary": {
-      "dict.agent_manager": "Menedżer Agentów",
-      "dict.conversation_view": "Widok konwersacji",
+      "dict.agent_manager": "Menedżer agentów",
+      "dict.conversation_view": "Widok rozmowy",
       "dict.inbox": "Skrzynka odbiorcza",
       "dict.playground": "Plac zabaw",
       "dict.panes": "Panele",
       "dict.changes_sidebar": "Panel zmian",
       "dict.sources": "Źródła / kontekst",
-      "dict.browser_subagent": "Sub-agent przeglądarki",
+      "dict.browser_subagent": "Podagent przeglądarki",
       "dict.planning_mode": "Tryb planowania",
       "dict.fast_mode": "Tryb szybki",
       "dict.artifact_review": "Przegląd artefaktów",
@@ -67,14 +67,14 @@
       "dict.overage_spending": "Wydatki ponad limit",
       "dict.model": "Model (AI)",
       "dict.context": "Kontekst",
-      "dict.prompt": "Prompt / zapytanie",
+      "dict.prompt": "Polecenie / zapytanie",
       "dict.token": "Token (jednostka tekstu)",
-      "dict.workspace": "Przestrzeń robocza",
+      "dict.workspace": "Obszar roboczy",
       "dict.extension": "Rozszerzenie",
       "dict.command_palette": "Paleta poleceń",
       "dict.status_bar": "Pasek stanu",
       "dict.tab_completion": "Podpowiedzi tabulatora",
-      "dict.mcp": "Protokół kontekstu modelu (MCP)",
+      "dict.mcp": "MCP (Protokół Kontekstu Modelu)",
       "dict.reasoning_model": "Model rozumujący"
     }
   }

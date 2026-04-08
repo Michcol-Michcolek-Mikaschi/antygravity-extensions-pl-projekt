@@ -130,6 +130,10 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
+    "extract:l10n": "node scripts/extract-ui-strings.mjs --pretty",
+    "audit:l10n": "node scripts/audit-coverage.mjs --out reports/l10n-coverage.json",
+    "audit:l10n:quality": "node scripts/audit-quality.mjs --out reports/l10n-quality.json",
+    "audit:l10n:strict": "node scripts/audit-coverage.mjs --strict --out reports/l10n-coverage.json && node scripts/audit-quality.mjs --strict --out reports/l10n-quality.json",
     "package": "vsce package",
     "publish:ovsx": "ovsx publish"
   },
